@@ -5,15 +5,18 @@ namespace App\Controller\Webapp;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class AppController
+ * @package App\Controller\Webapp
+ * @Route("/",name="op_webapp_app")
+ */
 class AppController extends AbstractController
 {
     /**
-     * @Route("/webapp/app", name="webapp_app")
+     * @Route("/", name="webapp_app_index")
      */
     public function index()
     {
-        return $this->render('webapp/app/index.html.twig', [
-            'controller_name' => 'AppController',
-        ]);
+        return $this->render('webapp/app/index.html.twig');
     }
 }
