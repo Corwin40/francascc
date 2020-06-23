@@ -11,6 +11,22 @@ import '../scss/admin.scss';
 const $ = require('jquery');
 require('bootstrap');
 
+import react from "react";
+import ReactDOM from 'react-dom';
+import React from "react";
+import {HashRouter, Switch, Route, withRouter} from "react-router-dom";
+import Navbar from "./components/Admin/Navbar";
 
+
+const Admin = () => {
+    return(
+        <HashRouter>
+            <Navbar/>
+        </HashRouter>
+    )
+}
+
+const rootElement = document.querySelector("#Admin");
+ReactDOM.render(<Admin/>, rootElement);
 
 console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
