@@ -5,10 +5,15 @@ namespace App\Controller\Admin;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class DashboardController
+ * @package App\Controller\Admin
+ * @Route("/admin", name="op_admin_dashboard")
+ */
 class DashboardController extends AbstractController
 {
     /**
-     * @Route("/admin/dashboard", name="admin_dashboard")
+     * @Route("/", name="dashboard")
      */
     public function index()
     {
