@@ -87,7 +87,7 @@ const UsersPage = () => {
                     </div>
                 </div>
                 <div className="col-2">
-                    <Link to="" className="btn btn-secondary"><FontAwesomeIcon icon={faPlusCircle} /> Ajouter un utilisateur</Link>
+                    <Link to={"/users/new"} className="btn btn-secondary"><FontAwesomeIcon icon={faPlusCircle} /> Ajouter un utilisateur</Link>
                 </div>
             </div>
             <table className="table table-sm table-hover">

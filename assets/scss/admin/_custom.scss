@@ -25,6 +25,10 @@ $aside-large : 12rem;
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
 
+#aside-list{
+  padding-top: 6rem;
+}
+
 #aside-list a{
   padding: 8px 8px 8px 0px;
   text-decoration: none;

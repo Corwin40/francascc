@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import {Link, NavLink} from "react-router-dom";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faArrowAltCircleRight, faArrowAltCircleDown, faUser} from '@fortawesome/free-solid-svg-icons';
+import {faArrowAltCircleRight, faArrowAltCircleDown, faUser, } from '@fortawesome/free-solid-svg-icons';
 
 
 const AsideAdmin = ({open, handleChangeOpen}) => {
@@ -19,6 +19,12 @@ const AsideAdmin = ({open, handleChangeOpen}) => {
                 </a>
             </nav>
             <div id="aside-list">
+                <ul>
+                    <li>
+                        <a className="title">WebApp</a>
+                        <Link to="/Users">Pages</Link>
+                    </li>
+                </ul>
                 <ul>
                     <li>
                         <a className="title">Administration</a>

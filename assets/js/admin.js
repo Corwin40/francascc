@@ -19,12 +19,13 @@ import NavbarAdmin from "./components/modules/NavbarAdmin";
 import AsideAdmin from "./components/modules/AsideAdmin";
 import DashBoardPage from "./pages/admin/Dashboard";
 import UsersPage from "./pages/admin/Users/UsersPage"
+import UserPage from "./pages/admin/Users/userPage";
 
 
 
 const Admin = () => {
 
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     const handleChangeOpen = () => {
         if (!open){
@@ -43,6 +44,8 @@ const Admin = () => {
                 <NavbarAdmin/>
                 <div className="container-fluid pt-3">
                     <Switch>
+                        <Route path="/Users/new" component={UserPage} />
+                        <Route path="/Users/:id" component={UserPage} />
                         <Route path="/Users" component={UsersPage} />
                         <Route path="/" component={DashBoardPage}/>
                     </Switch>
