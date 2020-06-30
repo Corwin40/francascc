@@ -17,25 +17,21 @@ const UserPage = ({match, history}) => {
         firstName: "",
         lastName:"",
         email:"",
-        isActive:"",
-        createAt:formatDate(date),
-        updateAt:formatDate(date)
+        isActive:""
     });
 
     const [errors, setErrors] = useState({
         firstName: "",
         lastName:"",
         email:"",
-        isActive:"",
-        createAt:"",
-        updateAt:""
+        isActive:""
     });
 
     // Récupère les données correspondant à l'id transmise pour une modification
     const fetchUser = async id =>{
         try{
-            const {firstName, lastName, email, isActive, updateAt} = await UsersAPI.findOne(id);
-            setUser({firstName, lastName, email, isActive, updateAt})
+            const {firstName, lastName, email, isActive} = await UsersAPI.findOne(id);
+            setUser({firstName, lastName, email, isActive})
         } catch (error) {
             console.log(error.response);
         }
@@ -130,33 +126,12 @@ const UserPage = ({match, history}) => {
                     label = "Activation de l'utilisateur"
                     isOn={user.isActive}
                     handleToggle={({currentTarget}) => {
+                        setValue(!user.isActive);
                         const {name} = currentTarget;
                         setUser({... user, [name]:value});
                     }}
                 />
                 }
-
-
-                {!editing &&
-                <Field
-                    name="createAt"
-                    label="Créer le"
-                    type="text"
-                    value={user.createAt}
-                    onChange={handleChange}
-                    error={errors.createAt}
-                />
-                ||
-                <Field
-                    name="updateAt"
-                    label="Mise à jour"
-                    type="text"
-                    value={user.updateAt}
-                    onChange={handleChange}
-                    error={errors.updateAt}
-                />
-                }
-
 
                 <div className="form-group">
                     {!editing && <button className="btn btn-sm btn-success mr-1">Ajouter</button> || <button className="btn btn-sm btn-success mr-1">Modifier</button>}
