@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import Field from "../../../components/forms/Fields";
 import UsersAPI from "../../../services/admin/UsersAPI";
 import moment from "moment";
+import Checkbox from "../../../components/forms/Checkbox";
 
 const UserPage = ({match, history}) => {
 
@@ -52,6 +53,9 @@ const UserPage = ({match, history}) => {
         setUser({... user, [name]:value});
         console.log({name, value})
     };
+
+    // mise en place du Checkbox
+    const [value, setValue] = useState(false);
 
     const handleSubmit = async (event) =>{
         event.preventDefault();
@@ -109,13 +113,29 @@ const UserPage = ({match, history}) => {
                     onChange={handleChange}
                     error={errors.email}
                 />
+                {!editing &&
                 <Checkbox
-                    type="checkbox"
                     name="isActive"
-                    checked={user.isActive}
-                    value={user.isActive}
-                    onClick={handleChange}
+                    label = "Activation de l'utilisateur"
+                    isOn={value}
+                    handleToggle={({currentTarget}) => {
+                        setValue(!value);
+                        const {name} = currentTarget;
+                        setUser({... user, [name]:value});
+                    }}
                 />
+                ||
+                <Checkbox
+                    name="isActive"
+                    label = "Activation de l'utilisateur"
+                    isOn={user.isActive}
+                    handleToggle={({currentTarget}) => {
+                        const {name} = currentTarget;
+                        setUser({... user, [name]:value});
+                    }}
+                />
+                }
+
 
                 {!editing &&
                 <Field
