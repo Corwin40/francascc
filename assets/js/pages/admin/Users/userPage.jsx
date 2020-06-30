@@ -17,7 +17,7 @@ const UserPage = ({match, history}) => {
         firstName: "",
         lastName:"",
         email:"",
-        isActive:""
+        isActive: false,
     });
 
     const [errors, setErrors] = useState({
@@ -47,7 +47,6 @@ const UserPage = ({match, history}) => {
     const handleChange = ({currentTarget}) => {
         const {name, value} = currentTarget;
         setUser({... user, [name]:value});
-        console.log({name, value})
     };
 
     // mise en place du Checkbox
@@ -68,7 +67,7 @@ const UserPage = ({match, history}) => {
             const {violations} = response.data;
             if(violations){
                 const apiErrors = {};
-                forEach(({propertyPath, message})=>{
+                violations.forEach(({propertyPath, message})=>{
                     apiErrors[propertyPath] = message;
                 });
                 setErrors(apiErrors);

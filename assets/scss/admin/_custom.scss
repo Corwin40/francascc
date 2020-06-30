@@ -1,6 +1,15 @@
 $aside-width : 4rem;
 $aside-large : 12rem;
 
+body {
+  overflow-x: hidden;
+}
+
+
+/********
+* REGLES DE L'ASIDE
+********/
+
 .aside-closed {
   height: 100%; /* 100% Full-height */
   width: $aside-width; /* 0 width - change this with JavaScript */
@@ -24,6 +33,14 @@ $aside-large : 12rem;
   overflow-x: hidden; /* Disable horizontal scroll */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
+#aside .navbar-brand {
+  display: inline-block;
+  padding-top: 0.33594rem;
+  padding-bottom: 0.33594rem;
+  margin-right: .8rem;
+  line-height: inherit;
+  white-space: nowrap;
+}
 
 #aside-list{
   padding-top: 6rem;
@@ -43,26 +60,12 @@ $aside-large : 12rem;
 
 #aside-list ul{
   list-style:none;
+  padding-left: 0rem;
 }
-
-.main {
-  transition: margin-left 0.5s;
-  overflow:hidden;
-  position: fixed; /* Stay in place */
-  left: $aside-width;
-  width: calc(100% - #{$aside-width});
-}
-
-.main-large {
-  transition: margin-left 0.5s;
-  overflow:hidden;
-  position: fixed; /* Stay in place */
-  left: $aside-large;
-  width: calc(100% - #{$aside-large});
-}
-
-body {
-  overflow-x: hidden;
+#aside-list ul > li {
+  list-style:none;
+  padding-left: 1.4rem;
+  height: 2rem;
 }
 
 .arrowLeft{
@@ -71,6 +74,28 @@ body {
 .arrowDown{
   transition: 0.5s;
 }
+
+
+/********
+* REGLES DU MAIN
+********/
+
+.main {
+  transition: 0.5s;
+  overflow:hidden;
+  position: fixed; /* Stay in place */
+  left: $aside-width;
+  width: calc(100% - #{$aside-width});
+}
+
+.main-large {
+  transition: 0.5s;
+  overflow:hidden;
+  position: fixed; /* Stay in place */
+  left: $aside-large;
+  width: calc(100% - #{$aside-large});
+}
+
 
 .btn-xs, .btn-group-xs > .btn {
   padding: 0.15rem 0.4rem;

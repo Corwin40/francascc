@@ -86,7 +86,7 @@ const UsersPage = () => {
                         <input type="text" className="form-control" placeholder="Rechercher ..."/>
                     </div>
                 </div>
-                <div className="col-2">
+                <div className="col-10">
                     <Link to={"/users/new"} className="btn btn-secondary"><FontAwesomeIcon icon={faPlusCircle} /> Ajouter un utilisateur</Link>
                 </div>
             </div>

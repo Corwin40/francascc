@@ -199,9 +199,14 @@ class User implements UserInterface
         return $this->isActive;
     }
 
+    /**
+     * @param bool $isActive
+     * @return $this
+     * @ORM\PrePersist()
+     */
     public function setIsActive(bool $isActive): self
     {
-        $this->isActive = $isActive;
+        $this->isActive = false;
 
         return $this;
     }
