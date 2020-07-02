@@ -23,15 +23,31 @@ const AsideAdmin = ({open, handleChangeOpen}) => {
                 <div className="aside-userpanel">
 
                 </div>
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column">
+                <nav className="mt-2">
+                    <ul className="nav nav-pills nav-sidebar flex-column">
                         <li>
                             <a>
-                                <p>Configuration</p>
+                                <p>CONTENU</p>
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <Link to={"/pages"}><p>Pages</p></Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to={"/articles"}><p>Articles</p></Link>
+                        </li>
+                    </ul>
+                    <ul className="nav nav-pills nav-sidebar flex-column">
+                        <li>
+                            <a>
+                                <p>PARAMETRES</p>
                             </a>
                         </li>
                         <li className="nav-item">
                             <Link to={"/users"}><p>Utilisateur</p></Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to={"/site/1"}><p>Site</p></Link>
                         </li>
                     </ul>
                 </nav>

@@ -3,7 +3,10 @@
 namespace App\Entity\Admin;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Entity\Webapp\Articles;
 use App\Repository\Admin\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -91,6 +94,16 @@ class User implements UserInterface
      * @Groups({"users_read"})
      */
     private $updateAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Articles::class, mappedBy="author")
+     */
+    private $articles;
+
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -239,6 +252,37 @@ class User implements UserInterface
     public function setUpdateAt(): self
     {
         $this->updateAt = new \DateTime();
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Articles[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Articles $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Articles $article): self
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+            // set the owning side to null (unless already changed)
+            if ($article->getAuthor() === $this) {
+                $article->setAuthor(null);
+            }
+        }
 
         return $this;
     }

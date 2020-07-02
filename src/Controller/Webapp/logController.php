@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class logController extends AbstractController
 {
     /**
-     * @Route("/op_login", name="login")
+     * @Route("/op_login/", name="login")
      */
     public function index()
     {
