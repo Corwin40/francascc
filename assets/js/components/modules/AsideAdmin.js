@@ -17,7 +17,7 @@ const AsideAdmin = ({open, handleChangeOpen}) => {
                     <FontAwesomeIcon icon={faArrowAltCircleDown} size="lg"/>
                     }
                 </a>
-                <NavLink className="navbar-brand" to="/">OpenGaia</NavLink>
+                <NavLink className="navbar-brand" to="/dashboard">OpenGaia</NavLink>
             </nav>
             <div id="aside-list">
                 <div className="aside-userpanel">

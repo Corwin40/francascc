@@ -18,6 +18,8 @@ import {HashRouter, Switch, Route, withRouter} from "react-router-dom";
 //import Tools
 import NavbarAdmin from "./components/modules/NavbarAdmin";
 import AsideAdmin from "./components/modules/AsideAdmin";
+import PrivateRoute from "./components/tools/PrivateRoute";
+
 //import all pages
 import DashBoardPage from "./pages/admin/Dashboard";
 import SitePage from "./pages/admin/site/SitePage"
@@ -28,6 +30,9 @@ import PagesPage from "./pages/Web/pages/PagesPage";
 // imports API
 import AuthContext from "./contexts/AuthContext";
 import authAPI from "./services/admin/authAPI";
+import LoginPage from "./pages/admin/LoginPage";
+
+authAPI.setup();
 
 const Admin = () => {
 
@@ -60,13 +65,14 @@ const Admin = () => {
                 <NavbarWithRouter/>
                 <div className="container-fluid pt-3">
                     <Switch>
-                        <Route path="/pages" component={PagesPage} />
-                        <Route path="/articles" component={ArticlesPage}/>
-                        <Route path="/site/1" component={SitePage}/>
-                        <Route path="/Users/new" component={UserPage} />
-                        <Route path="/Users/:id" component={UserPage} />
-                        <Route path="/Users" component={UsersPage} />
-                        <Route path="/" component={DashBoardPage}/>
+                        <PrivateRoute path="/pages" component={PagesPage} />
+                        <PrivateRoute path="/articles" component={ArticlesPage}/>
+                        <PrivateRoute path="/site/1" component={SitePage}/>
+                        <PrivateRoute path="/Users/new" component={UserPage} />
+                        <PrivateRoute path="/Users/:id" component={UserPage} />
+                        <PrivateRoute path="/Users" component={UsersPage} />
+                        <PrivateRoute path="/dashboard" component={DashBoardPage}/>
+                        <Route path="/" component={LoginPage} />
                     </Switch>
                 </div>
             </main>

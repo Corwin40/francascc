@@ -1,14 +1,12 @@
-import React, {useContext, useState} from 'react';
-
-// import API's
+import React, {useState, useContext} from 'react';
 import authAPI from "../../services/admin/authAPI";
 import AuthContext from "../../contexts/AuthContext";
-// import des éléments de Form
 import Field from "../../components/forms/Fields";
-const LoginPage = () => {
+
+const LoginPage = ({ history }) => {
 
     // Gestion de l'authentification par les contexts de Réact
-    const {setIsAuthenticated} = useContext(AuthContext);
+    const { setIsAuthenticated} = useContext(AuthContext);
 
     // State pour l'alimentation du mot de passe
     const [credentials, setCredentials] = useState({
@@ -30,7 +28,7 @@ const LoginPage = () => {
             await authAPI.authenticate(credentials);
             setError("");
             setIsAuthenticated(true);
-            history.replace("http://localhost:8000/op_login");
+            history.replace("/Accueil");
         }catch(error){
             console.log(error.response);
             setError("Aucun compte n'existe avec cette adresse ou les informations ne correspondent pas ! ")
@@ -38,19 +36,21 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="wrapper">
-            <img src="#"/>
-            <form className="form-signin" onSubmit={handleSubmit}>
-                <h2 className="form-signin-heading">Connexion</h2>
+        <>
+            <h1>Connexion à l'application</h1>
+
+            <form onSubmit={handleSubmit}>
                 <Field name="username" label="Identifiant" placeholder="Adresse E-mail de connexion" type="text" error={error} onChange={handleChange} value={credentials.username} />
                 <Field name="password" label="Mot de passe" placeholder="" type="password" onChange={handleChange} value={credentials.password} />
-                <label className="checkbox">
-                    <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"/> Remember me
-                </label>
-                <button className="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+
+                <div className="form-group">
+                    <button type="submit" className="btn btn-success">Se connecter</button>
+                </div>
+
             </form>
-        </div>
-    );
+
+        </>
+    )
 };
 
 export default LoginPage;
