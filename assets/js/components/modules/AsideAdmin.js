@@ -2,8 +2,9 @@ import React, {useContext, useState} from 'react';
 import {Link, NavLink} from "react-router-dom";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faArrowAltCircleRight, faArrowAltCircleDown, faUser, faGlobe,} from '@fortawesome/free-solid-svg-icons';
-
+import {faArrowAltCircleRight, faArrowAltCircleDown, faUser, faGlobe, faPenSquare, faFileAlt, faBook, faCog} from '@fortawesome/free-solid-svg-icons';
+import Accordion from "react-bootstrap/Accordion";
+import Button from "react-bootstrap/cjs/Button";
 
 const AsideAdmin = ({open, handleChangeOpen}) => {
 
@@ -27,29 +28,44 @@ const AsideAdmin = ({open, handleChangeOpen}) => {
                     <ul className="nav nav-pills nav-sidebar flex-column">
                         <li>
                             <a>
+                                <FontAwesomeIcon icon={faBook}/>
                                 <p>CONTENU</p>
                             </a>
                         </li>
                         <li className="nav-item">
-                            <Link to={"/pages"}><p>Pages</p></Link>
+                            <Link to={"/pages"}>
+                                <FontAwesomeIcon icon={faFileAlt}/>
+                                <p>Pages</p>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={"/articles"}><p>Articles</p></Link>
+                            <Link to={"/articles"}>
+                                <FontAwesomeIcon icon={faPenSquare}/>
+                                <p>Articles</p>
+                            </Link>
                         </li>
                     </ul>
                     <ul className="nav nav-pills nav-sidebar flex-column">
-                        <li>
+                        <li className="nav-item treeview-on">
                             <a>
+                                <FontAwesomeIcon icon={faCog}/>
                                 <p>PARAMETRES</p>
                             </a>
                         </li>
                         <li className="nav-item">
-                            <Link to={"/users"}><p>Utilisateur</p></Link>
+                            <Link to={"/users"}>
+                                <FontAwesomeIcon icon={faUser}/>
+                                <p>Utilisateur</p>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={"/site/1"}><p>Site</p></Link>
+                            <Link to={"/site/1"}>
+                                <FontAwesomeIcon icon={faGlobe}/>
+                                <p>Site</p>
+                            </Link>
                         </li>
                     </ul>
+
                 </nav>
             </div>
 

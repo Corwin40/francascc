@@ -91,20 +91,20 @@ const ArticlesPage = () => {
             <table className="table table-sm table-hover">
                 <thead>
                 <tr>
-                    <th>id</th>
-                    <th>Nom et Prénom</th>
-
+                    <th>titre de l'article</th>
+                    <th>Auteur</th>
+                    <th>Catégorie</th>
                     <th>Créer le</th>
                     <th>Modifier le</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                {paginatedArticles.map(user => (                                                    // La fonction map = for de symfony, key = Sur quelle clé le map doit il opérer.
-                    <tr key={user.id}>
-                        <td>{user.id}</td>
-                        <td><Link to={"/articles/" + article.id}></Link></td>
-
+                {paginatedArticles.map(article => (                                                    // La fonction map = for de symfony, key = Sur quelle clé le map doit il opérer.
+                    <tr key={article.id}>
+                        <td><Link to={"/articles/" + article.id}>{article.title}</Link></td>
+                        <td>{article.author.firstName} {article.author.lastName}</td>
+                        <td></td>
                         <td>{formatDate(article.createAt)}</td>
                         <td>{formatDate(article.updateAt)}</td>
                         <td>
