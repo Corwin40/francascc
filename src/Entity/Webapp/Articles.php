@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
+ * 0@ORM\HasLifecycleCallbacks()
  * @ApiResource(
  *     normalizationContext={
  *      "groups"={"articles_read"}
@@ -50,6 +51,8 @@ class Articles
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
+     *
+     * @Groups({"articles_read"})
      */
     private $author;
 
@@ -61,7 +64,7 @@ class Articles
     private $createAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      *
      * @Groups({"articles_read"})
      */
@@ -125,9 +128,12 @@ class Articles
         return $this->createAt;
     }
 
-    public function setCreateAt(?\DateTimeInterface $createAt): self
+    /**
+     * @ORM\PrePersist()
+     */
+    public function setCreateAt(): self
     {
-        $this->createAt = $createAt;
+        $this->createAt = new \DateTime();
 
         return $this;
     }
@@ -137,9 +143,13 @@ class Articles
         return $this->updateAt;
     }
 
-    public function setUpdateAt(\DateTimeInterface $updateAt): self
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function setUpdateAt(): self
     {
-        $this->updateAt = $updateAt;
+        $this->updateAt = new \DateTime();
 
         return $this;
     }

@@ -59,7 +59,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Groups({"users_read"})
+     * @Groups({"users_read", "articles_read"})
      * @Assert\NotBlank(message="Ce champs doit contenir un prénom")
      * @Assert\Length(min=3, minMessage="le prénom doit contenir entre 3 et 255 caractères", max=255, maxMessage="le prénom doit contenir entre 3 et 255 caractères")
      */
@@ -68,7 +68,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Groups({"users_read"})
+     * @Groups({"users_read", "articles_read"})
      * @Assert\NotBlank(message="Ce champs doit contenir un nom")
      * @Assert\Length(min=3, minMessage="le nom doit contenir entre 3 et 255 caractères", max=255, maxMessage="le om doit contenir entre 3 et 255 caractères")
      */
@@ -215,11 +215,10 @@ class User implements UserInterface
     /**
      * @param bool $isActive
      * @return $this
-     * @ORM\PrePersist()
      */
     public function setIsActive(bool $isActive): self
     {
-        $this->isActive = false;
+        $this->isActive = $isActive;
 
         return $this;
     }

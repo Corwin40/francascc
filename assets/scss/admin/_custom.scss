@@ -21,7 +21,6 @@ body {
   overflow-x: hidden; /* Disable horizontal scroll */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
-
 .aside-open {
   height: 100%; /* 100% Full-height */
   width: $aside-large; /* 0 width - change this with JavaScript */
@@ -33,6 +32,16 @@ body {
   overflow-x: hidden; /* Disable horizontal scroll */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
+
+.arrowLeft{
+  transition: 0.5s;
+}
+.arrowDown{
+  transition: 0.5s;
+}
+
+/*** Zone Logo ***/
+
 #aside .navbar-brand {
   display: inline-block;
   padding-top: 0.33594rem;
@@ -41,6 +50,11 @@ body {
   line-height: inherit;
   white-space: nowrap;
 }
+
+/*** Zone Profil Utilisateur ***/
+
+
+/*** Zone Liste Menu ***/
 
 #aside-list{
   padding-top: 6rem;
@@ -67,14 +81,17 @@ body {
   padding-left: 1.4rem;
   height: 2rem;
 }
-
-.arrowLeft{
-  transition: 0.5s;
-}
-.arrowDown{
-  transition: 0.5s;
+#aside-list p {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 1.5rem;
 }
 
+#aside-list > nav > ul > li > a{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 
 /********
 * REGLES DU MAIN

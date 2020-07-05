@@ -5,6 +5,7 @@ import UsersAPI from "../../../services/admin/UsersAPI";
 import moment from "moment";
 import Checkbox from "../../../components/forms/Checkbox";
 import {toast} from "react-toastify";
+import PagesAPI from "../../../services/webapp/PagesAPI";
 
 const UserPage = ({match, history}) => {
 
@@ -14,25 +15,33 @@ const UserPage = ({match, history}) => {
     // permet de vérifier route Ajout ou edition
     const {id = "new" } = match.params;
 
-    const [user, setUser] = useState({
-        firstName: "",
-        lastName:"",
-        email:"",
-        isActive: false,
+    const [page, setPage] = useState({
+        title:"",
+        slug:"",
+        definition:"",
+        type:"",
+        isActive:false,
+        isMenu:false,
+        createAt:"",
+        updateAt:""
     });
 
     const [errors, setErrors] = useState({
-        firstName: "",
-        lastName:"",
-        email:"",
-        isActive:""
+        title:"",
+        slug:"",
+        definition:"",
+        type:"",
+        isActive:"",
+        isMenu:"",
+        createAt:"",
+        updateAt:""
     });
 
     // Récupère les données correspondant à l'id transmise pour une modification
-    const fetchUser = async id =>{
+    const fetchPage = async id =>{
         try{
-            const {firstName, lastName, email, isActive} = await UsersAPI.findOne(id);
-            setUser({firstName, lastName, email, isActive})
+            const {title, slug, definition, type, isActive, isMenu} = await PagesAPI.findOne(id);
+            setPage({title, slug, definition, type, isActive, isMenu})
         } catch (error) {
             console.log(error.response);
         }
@@ -42,12 +51,12 @@ const UserPage = ({match, history}) => {
     useEffect(()=>{
         if(id!== "new")
             setEditing(true);
-        fetchUser(id);
+        fetchPage(id);
     }, [id]);
 
     const handleChange = ({currentTarget}) => {
         const {name, value} = currentTarget;
-        setUser({... user, [name]:value});
+        setPage({... page, [name]:value});
     };
 
     // mise en place du Checkbox
@@ -57,13 +66,13 @@ const UserPage = ({match, history}) => {
         event.preventDefault();
         try {
             if (editing) {
-                const response = await UsersAPI.updateOne(id, user);
-                toast.info("Le profil a bien été modifié dans la base.")
+                const response = await PagesAPI.updateOne(id, page);
+                toast.info("la page à bien été modifiée.")
             }else{
-                const response = await UsersAPI.newOne(user);
+                const response = await PagesAPI.newOne(page);
                 setErrors({});
-                toast.error("Une erreur s'est produite durant l'neregistrement.")
-                history.replace("/users");
+                toast.info("La nouvelle page a été enregistrée.")
+                history.replace("/page");
             }
 
         } catch ({response}) {
@@ -85,59 +94,83 @@ const UserPage = ({match, history}) => {
             </div>
             <form onSubmit={handleSubmit}>
                 <Field
-                    name="firstName"
-                    label="Prénom de l'utilisateur"
-                    placeholder="Entrer le prénom"
+                    name="title"
+                    label="Titre de la page"
+                    placeholder=""
                     type="text"
-                    value={user.firstName}
+                    value={page.title}
                     onChange={handleChange}
-                    error={errors.firstName}
+                    error={errors.title}
                 />
                 <Field
-                    name="lastName"
-                    label="Nom de l'utilisateur"
-                    placeholder="Entrer le nom"
+                    name="slug"
+                    label="slug"
+                    placeholder=""
                     type="text"
-                    value={user.lastName}
+                    value={page.slug}
                     onChange={handleChange}
-                    error={errors.lastName}
+                    error={errors.slug}
                 />
                 <Field
-                    name="email"
-                    label="E-mail de l'utilisateur"
-                    placeholder="Entrer l'E-mail"
-                    type="email"
-                    value={user.email}
+                    name="definition"
+                    label="definition"
+                    placeholder=""
+                    type="text"
+                    value={page.definition}
                     onChange={handleChange}
-                    error={errors.email}
+                    error={errors.definition}
                 />
                 {!editing &&
                 <Checkbox
-                    name="isActive"
-                    label = "Activation de l'utilisateur"
+                    name="isPublish"
+                    label = "La page est publiée ?"
                     isOn={value}
                     handleToggle={({currentTarget}) => {
                         setValue(!value);
                         const {name} = currentTarget;
-                        setUser({... user, [name]:value});
+                        setPage({... page, [name]:value});
                     }}
                 />
                 ||
                 <Checkbox
                     name="isActive"
-                    label = "Activation de l'utilisateur"
-                    isOn={user.isActive}
+                    label = "La page est publiée ?"
+                    isOn={page.isActive}
                     handleToggle={({currentTarget}) => {
-                        setValue(!user.isActive);
+                        setValue(!page.isActive);
                         const {name} = currentTarget;
-                        setUser({... user, [name]:value});
+                        setPage({... page, [name]:value});
+                    }}
+                />
+                }
+
+                {!editing &&
+                <Checkbox
+                    name="isMenu"
+                    label = "La page est un menu ?"
+                    isOn={value}
+                    handleToggle={({currentTarget}) => {
+                        setValue(!value);
+                        const {name} = currentTarget;
+                        setPage({... page, [name]:value});
+                    }}
+                />
+                ||
+                <Checkbox
+                    name="isMenu"
+                    label = "La page est un menu ?"
+                    isOn={page.isMenu}
+                    handleToggle={({currentTarget}) => {
+                        setValue(!page.isActive);
+                        const {name} = currentTarget;
+                        setPage({... page, [name]:value});
                     }}
                 />
                 }
 
                 <div className="form-group">
                     {!editing && <button className="btn btn-sm btn-success mr-1">Ajouter</button> || <button className="btn btn-sm btn-success mr-1">Modifier</button>}
-                    <Link to="/users" className="btn btn-sm btn-secondary">Retour à la liste</Link>
+                    <Link to="/pages" className="btn btn-sm btn-secondary">Retour à la liste</Link>
                 </div>
 
 

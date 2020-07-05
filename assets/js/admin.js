@@ -27,10 +27,14 @@ import UsersPage from "./pages/admin/Users/UsersPage"
 import UserPage from "./pages/admin/Users/userPage";
 import ArticlesPage from "./pages/Web/Articles/ArticlesPage";
 import PagesPage from "./pages/Web/pages/PagesPage";
+import PagePage from "./pages/Web/pages/PagePage"
 // imports API
 import AuthContext from "./contexts/AuthContext";
 import authAPI from "./services/admin/authAPI";
 import LoginPage from "./pages/admin/LoginPage";
+import {toast, ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ArticlePage from "./pages/Web/Articles/ArticlePage";
 
 authAPI.setup();
 
@@ -65,18 +69,28 @@ const Admin = () => {
                 <NavbarWithRouter/>
                 <div className="container-fluid pt-3">
                     <Switch>
+                        <PrivateRoute path="/pages/:id" component={PagePage} />
+                        <PrivateRoute path="/pages/new" component={PagePage} />
                         <PrivateRoute path="/pages" component={PagesPage} />
+
+                        <PrivateRoute path="/articles/:id" component={ArticlePage}/>
+                        <PrivateRoute path="/articles/new" component={ArticlePage}/>
                         <PrivateRoute path="/articles" component={ArticlesPage}/>
-                        <PrivateRoute path="/site/1" component={SitePage}/>
+
+                        <PrivateRoute path="/site/:id" component={SitePage}/>
+
                         <PrivateRoute path="/Users/new" component={UserPage} />
                         <PrivateRoute path="/Users/:id" component={UserPage} />
                         <PrivateRoute path="/Users" component={UsersPage} />
+
                         <PrivateRoute path="/dashboard" component={DashBoardPage}/>
+
                         <Route path="/" component={LoginPage} />
                     </Switch>
                 </div>
             </main>
         </HashRouter>
+            <ToastContainer position={toast.POSITION.BOTTOM_RIGHT}/>
         </AuthContext.Provider>
     )
 }
