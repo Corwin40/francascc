@@ -4,7 +4,10 @@ import {Link} from "react-router-dom";
 import ArticlesAPI from "../../../services/webapp/ArticlesAPI";
 import moment from "moment";
 import Pagination from "../../../components/tools/Pagination";
+import {toast} from "react-toastify";
+
 // Styles
+import {Modal, Button} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faEdit, faUserTimes, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -15,6 +18,8 @@ const ArticlesPage = () => {
     const [currentPage, setCurrentPage] = useState(1); // state pour initialiser le départ de la boucle de pagination
     const [search, setSearch] = useState("");
     const [loading, setLoading] =useState(true);
+    const [showDelete, setShowDelete] = useState(false);
+    const [DeletedArticle, setDeletedArticle] = useState([]);
 
     // Capture toutes les entités de la table Articles
     const fetchArticles = async () => {
@@ -40,6 +45,9 @@ const ArticlesPage = () => {
         setArticles(articles.filter(article => article.id !== id));
         try {
             await ArticlesAPI.delete(id);
+            setShowDelete(false);
+            toast.info("L'article à bien été supprimé.")
+
         }catch(error){
             setArticles(originalArticles);
             console.log(error.response);
@@ -47,7 +55,7 @@ const ArticlesPage = () => {
     };
 
     // fonction pour capturer la nouvelle valeur de pagination
-    const handleChangePage = page => setCurrentPage(page);
+    const handleChangeArticlesPagination = page => setCurrentPage(page);
 
     // Mise en place de la fonction de recherche
     const handleSearch = ({currentTarget}) => {
@@ -71,6 +79,15 @@ const ArticlesPage = () => {
         itemsPerPage
     );
 
+    // Modal de suppression - ouverture
+    const handleDeleteClose = () => setShowDelete(false);
+    //Modal de suppression - fermeture
+    const handleDeleteShow = (article) => {
+        setDeletedArticle(article);
+        console.log(DeletedArticle);
+        setShowDelete(true);
+    }
+
     return (
         <>
             <div className="row">
@@ -81,7 +98,11 @@ const ArticlesPage = () => {
                 </div>
                 <div className="col-2">
                     <div className="form-group">
-                        <input type="text" className="form-control" placeholder="Rechercher ..."/>
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Rechercher ..."
+                        />
                     </div>
                 </div>
                 <div className="col-10">
@@ -102,7 +123,9 @@ const ArticlesPage = () => {
                 <tbody>
                 {paginatedArticles.map(article => (                                                    // La fonction map = for de symfony, key = Sur quelle clé le map doit il opérer.
                     <tr key={article.id}>
-                        <td><Link to={"/articles/" + article.id}>{article.title}</Link></td>
+                        <td>
+                            <Link to={"/articles/" + article.id}>{article.title}</Link>
+                        </td>
                         <td>{article.author.firstName} {article.author.lastName}</td>
                         <td></td>
                         <td>{formatDate(article.createAt)}</td>
@@ -112,11 +135,9 @@ const ArticlesPage = () => {
                                 className="btn btn-sm btn-primary mr-1"
                                 to={"/articles/" + article.id}><FontAwesomeIcon icon={faEdit} />
                             </Link>
-                            <button
-                                onClick={() => handleDelete(user.id)}                       // Active la fonction "handleDelete"
-                                className="btn btn-sm btn-danger">
+                            <Button variant="danger" onClick={() => handleDeleteShow(article)} size="sm">
                                 <FontAwesomeIcon icon={faUserTimes} />
-                            </button>
+                            </Button>
                         </td>
                     </tr>
                 ))}
@@ -128,9 +149,26 @@ const ArticlesPage = () => {
                 currentPage={currentPage}
                 itemsPerPage={itemsPerPage}
                 length={filteredArticles.length}
-                onPageChanged={handleChangePage}
+                onPageChanged={handleChangeArticlesPagination()}
             />
             }
+
+            <Modal show={showDelete} onHide={handleDeleteClose}>
+                <Modal.Body>
+                    <h1>Attention</h1>
+                    Vous êtes sur le point de supprimer l'article : <br/><b></b>{DeletedArticle.title}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleDeleteClose}>
+                        Fermer
+                    </Button>
+                    <Button
+                        onClick={() => handleDelete(DeletedArticle.id)}                       // Active la fonction "handleDelete"
+                        className="btn btn-sm btn-danger">
+                        <FontAwesomeIcon icon={faUserTimes} />
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </>
     );
 };

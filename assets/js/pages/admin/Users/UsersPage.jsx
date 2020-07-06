@@ -9,6 +9,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faUserTimes } from '@fortawesome/free-solid-svg-icons';
 import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
+import {Button, Modal} from "react-bootstrap";
 
 const UsersPage = () => {
 
@@ -17,6 +18,8 @@ const UsersPage = () => {
     const [currentPage, setCurrentPage] = useState(1); // state pour initialiser le départ de la boucle de pagination
     const [search, setSearch] = useState("");
     const [loading, setLoading] =useState(true);
+    const [showDelete, setShowDelete] = useState(false);
+    const [DeletedUser, setDeletedUser] = useState([]);
 
     // Capture toutes les entités de la table Users
     const fetchUsers = async () => {
@@ -40,6 +43,7 @@ const UsersPage = () => {
     const handleDelete = async id => {
         const originalUsers = [...users];                        // copie du tableau des customers
         setUsers(users.filter(user => user.id !== id));
+        setSh
         try {
             await UsersAPI.delete(id);
         }catch(error){
@@ -49,7 +53,7 @@ const UsersPage = () => {
     };
 
     // fonction pour capturer la nouvelle valeur de pagination
-    const handleChangePage = page => setCurrentPage(page);
+    const handleChangeUsersPagination = page => setCurrentPage(page);
 
     // Mise en place de la fonction de recherche
     const handleSearch = ({currentTarget}) => {
@@ -72,6 +76,15 @@ const UsersPage = () => {
         currentPage,
         itemsPerPage
     );
+
+    // Modal de suppression - ouverture
+    const handleDeleteClose = () => setShowDelete(false);
+    //Modal de suppression - fermeture
+    const handleDeleteShow = (user) => {
+        setDeletedUser(user);
+        console.log(DeletedUser);
+        setShowDelete(true);
+    }
 
     return (
         <>
@@ -116,11 +129,9 @@ const UsersPage = () => {
                                 className="btn btn-sm btn-primary mr-1"
                                 to={"/users/" + user.id}><FontAwesomeIcon icon={faEdit} />
                             </Link>
-                            <button
-                                onClick={() => handleDelete(user.id)}                       // Active la fonction "handleDelete"
-                                className="btn btn-sm btn-danger">
+                            <Button variant="danger" onClick={() => handleDeleteShow(user)} size="sm">
                                 <FontAwesomeIcon icon={faUserTimes} />
-                            </button>
+                            </Button>
                         </td>
                     </tr>
                 ))}
@@ -132,9 +143,28 @@ const UsersPage = () => {
                 currentPage={currentPage}
                 itemsPerPage={itemsPerPage}
                 length={filteredUsers.length}
-                onPageChanged={handleChangePage}
+                onPageChanged={handleChangeUsersPagination()}
             />
             }
+
+            <Modal show={showDelete} onHide={handleDeleteClose}>
+                <Modal.Body>
+                    <h1>Attention</h1>
+                    Vous êtes sur le point de supprimer le profil de <br/>
+                    <b>{DeletedUser.firstName} {DeletedUser.lastName}.</b><br/>
+                    Etes-vous sur de vouloir continuer ?
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleDeleteClose}>
+                        Fermer
+                    </Button>
+                    <Button
+                        onClick={() => handleDelete(DeletedUser.id)}                       // Active la fonction "handleDelete"
+                        className="btn btn-sm btn-danger">
+                        <FontAwesomeIcon icon={faUserTimes} />
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </>
     );
 };

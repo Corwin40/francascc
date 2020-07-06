@@ -72,7 +72,7 @@ const UserPage = ({match, history}) => {
                 const response = await PagesAPI.newOne(page);
                 setErrors({});
                 toast.info("La nouvelle page a été enregistrée.")
-                history.replace("/page");
+                history.replace("/pages");
             }
 
         } catch ({response}) {
