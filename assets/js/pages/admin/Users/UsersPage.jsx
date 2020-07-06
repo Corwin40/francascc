@@ -111,7 +111,7 @@ const UsersPage = () => {
                         <td>{user.isActive > 0 && <p>Oui</p> || <p>Non</p> }</td>
                         <td>{formatDate(user.createAt)}</td>
                         <td>{formatDate(user.updateAt)}</td>
-                        <td>
+                        <td className="float-right">
                             <Link
                                 className="btn btn-sm btn-primary mr-1"
                                 to={"/users/" + user.id}><FontAwesomeIcon icon={faEdit} />

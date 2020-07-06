@@ -107,7 +107,7 @@ const ArticlesPage = () => {
                         <td></td>
                         <td>{formatDate(article.createAt)}</td>
                         <td>{formatDate(article.updateAt)}</td>
-                        <td>
+                        <td className="float-right">
                             <Link
                                 className="btn btn-sm btn-primary mr-1"
                                 to={"/articles/" + article.id}><FontAwesomeIcon icon={faEdit} />
