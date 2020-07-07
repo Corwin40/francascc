@@ -9,7 +9,6 @@ const Checkbox = ({name, label, isOn, handleToggle}) => {
                     id={name}
                     type="checkbox"
                     className="custom-control-input"
-                    id="customSwitch1"
                     checked={isOn}
                     onChange={handleToggle}
                 />
