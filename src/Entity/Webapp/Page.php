@@ -3,7 +3,10 @@
 namespace App\Entity\Webapp;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Entity\Admin\User;
 use App\Repository\Webapp\PageRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,24 +33,35 @@ class Page
     private $slug;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string", length=100)
      */
-    private $definition;
-
-    /**
-     * @ORM\Column(type="string", length=255,  nullable=true)
-     */
-    private $type;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isActive;
+    private $state;
 
     /**
      * @ORM\Column(type="boolean")
      */
     private $isMenu;
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $metaKeywords = [];
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $metaDescription;
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $tags = [];
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="pages")
+     */
+    private $author;
+
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -68,6 +82,16 @@ class Page
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updateAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Section::class, mappedBy="page")
+     */
+    private $sections;
+
+    public function __construct()
+    {
+        $this->sections = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -98,38 +122,14 @@ class Page
         return $this;
     }
 
-    public function getDefinition(): ?string
+    public function getState(): ?string
     {
-        return $this->definition;
+        return $this->state;
     }
 
-    public function setDefinition(string $definition): self
+    public function setState(string $state): self
     {
-        $this->definition = $definition;
-
-        return $this;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    public function getIsActive(): ?bool
-    {
-        return $this->isActive;
-    }
-
-    public function setIsActive(bool $isActive): self
-    {
-        $this->isActive = $isActive;
+        $this->state = $state;
 
         return $this;
     }
@@ -142,6 +142,54 @@ class Page
     public function setIsMenu(bool $isMenu): self
     {
         $this->isMenu = $isMenu;
+
+        return $this;
+    }
+
+    public function getMetaKeywords(): ?array
+    {
+        return $this->metaKeywords;
+    }
+
+    public function setMetaKeywords(?array $metaKeywords): self
+    {
+        $this->metaKeywords = $metaKeywords;
+
+        return $this;
+    }
+
+    public function getMetaDescription(): ?string
+    {
+        return $this->metaDescription;
+    }
+
+    public function setMetaDescription(?string $metaDescription): self
+    {
+        $this->metaDescription = $metaDescription;
+
+        return $this;
+    }
+
+    public function getTags(): ?array
+    {
+        return $this->tags;
+    }
+
+    public function setTags(?array $tags): self
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
@@ -192,6 +240,37 @@ class Page
     public function setUpdateAt(): self
     {
         $this->updateAt = new \DateTime();
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Section[]
+     */
+    public function getSections(): Collection
+    {
+        return $this->sections;
+    }
+
+    public function addSection(Section $section): self
+    {
+        if (!$this->sections->contains($section)) {
+            $this->sections[] = $section;
+            $section->setPage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSection(Section $section): self
+    {
+        if ($this->sections->contains($section)) {
+            $this->sections->removeElement($section);
+            // set the owning side to null (unless already changed)
+            if ($section->getPage() === $this) {
+                $section->setPage(null);
+            }
+        }
 
         return $this;
     }
