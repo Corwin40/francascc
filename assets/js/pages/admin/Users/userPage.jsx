@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import Field from "../../../components/forms/Fields";
 import UsersAPI from "../../../services/admin/UsersAPI";
 import moment from "moment";
-import Checkbox from "../../../components/forms/Checkbox";
 import {toast} from "react-toastify";
+import Checkbox from "../../../components/forms/Checkbox";
 
 const UserPage = ({match, history}) => {
 
@@ -46,12 +46,11 @@ const UserPage = ({match, history}) => {
     }, [id]);
 
     const handleChange = ({currentTarget}) => {
-        const {name, value} = currentTarget;
-        setUser({... user, [name]:value});
-    };
-
-    // mise en place du Checkbox
-    const [value, setValue] = useState(false);
+        const {type, name} = currentTarget;
+        const value = type === 'checkbox' ? currentTarget.checked : currentTarget.value;
+        setUser({...user, [name]: value})
+        console.log(type, name, value);
+    }
 
     const handleSubmit = async (event) =>{
         event.preventDefault();
@@ -62,7 +61,7 @@ const UserPage = ({match, history}) => {
             }else{
                 const response = await UsersAPI.newOne(user);
                 setErrors({});
-                toast.error("Une erreur s'est produite durant l'neregistrement.")
+                toast.error("Une erreur s'est produite durant l'enregistrement.")
                 history.replace("/users");
             }
 
@@ -111,29 +110,12 @@ const UserPage = ({match, history}) => {
                     onChange={handleChange}
                     error={errors.email}
                 />
-                {!editing &&
                 <Checkbox
                     name="isActive"
-                    label = "Activation de l'utilisateur"
-                    isOn={value}
-                    handleToggle={({currentTarget}) => {
-                        setValue(!value);
-                        const {name} = currentTarget;
-                        setUser({... user, [name]:value});
-                    }}
+                    checked={user.isActive}
+                    label="Activation du compte"
+                    onChange={handleChange}
                 />
-                ||
-                <Checkbox
-                    name="isActive"
-                    label = "Activation de l'utilisateur"
-                    isOn={user.isActive}
-                    handleToggle={({currentTarget}) => {
-                        setValue(!user.isActive);
-                        const {name} = currentTarget;
-                        setUser({... user, [name]:value});
-                    }}
-                />
-                }
 
                 <div className="form-group">
                     {!editing && <button className="btn btn-sm btn-success mr-1">Ajouter</button> || <button className="btn btn-sm btn-success mr-1">Modifier</button>}

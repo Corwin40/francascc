@@ -22,8 +22,6 @@ const UserPage = ({match, history}) => {
         type:"",
         isActive:false,
         isMenu:false,
-        createAt:"",
-        updateAt:""
     });
 
     const [errors, setErrors] = useState({
@@ -33,8 +31,6 @@ const UserPage = ({match, history}) => {
         type:"",
         isActive:"",
         isMenu:"",
-        createAt:"",
-        updateAt:""
     });
 
     // Récupère les données correspondant à l'id transmise pour une modification
@@ -55,9 +51,11 @@ const UserPage = ({match, history}) => {
     }, [id]);
 
     const handleChange = ({currentTarget}) => {
-        const {name, value} = currentTarget;
-        setPage({... page, [name]:value});
-    };
+        const {type, name} = currentTarget;
+        const value = type === 'checkbox' ? currentTarget.checked : currentTarget.value;
+        setPage({...page, [name]: value})
+        console.log(type, name, value);
+    }
 
     // mise en place du Checkbox
     const [value, setValue] = useState(false);
@@ -120,59 +118,27 @@ const UserPage = ({match, history}) => {
                     onChange={handleChange}
                     error={errors.definition}
                 />
-                {!editing &&
-                <Checkbox
-                    name="isPublish"
-                    label = "La page est publiée ?"
-                    isOn={value}
-                    handleToggle={({currentTarget}) => {
-                        setValue(!value);
-                        const {name} = currentTarget;
-                        setPage({... page, [name]:value});
-                    }}
-                />
-                ||
+
                 <Checkbox
                     name="isActive"
-                    label = "La page est publiée ?"
-                    isOn={page.isActive}
-                    handleToggle={({currentTarget}) => {
-                        setValue(!page.isActive);
-                        const {name} = currentTarget;
-                        setPage({... page, [name]:value});
-                    }}
-                />
-                }
+                    label="Activation du compte"
+                    checked={page.isActive}
+                    onChange={handleChange}
 
-                {!editing &&
+                />
                 <Checkbox
                     name="isMenu"
-                    label = "La page est un menu ?"
-                    isOn={value}
-                    handleToggle={({currentTarget}) => {
-                        setValue(!value);
-                        const {name} = currentTarget;
-                        setPage({... page, [name]:value});
-                    }}
+                    label="Utiliser cette page comme menu du site"
+                    onChange={handleChange}
+                    checked={page.isMenu}
                 />
-                ||
-                <Checkbox
-                    name="isMenu"
-                    label = "La page est un menu ?"
-                    isOn={page.isMenu}
-                    handleToggle={({currentTarget}) => {
-                        setValue(!page.isActive);
-                        const {name} = currentTarget;
-                        setPage({... page, [name]:value});
-                    }}
-                />
-                }
+
+
 
                 <div className="form-group">
                     {!editing && <button className="btn btn-sm btn-success mr-1">Ajouter</button> || <button className="btn btn-sm btn-success mr-1">Modifier</button>}
                     <Link to="/pages" className="btn btn-sm btn-secondary">Retour à la liste</Link>
                 </div>
-
 
             </form>
         </>

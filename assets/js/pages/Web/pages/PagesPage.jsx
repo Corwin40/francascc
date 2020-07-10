@@ -116,7 +116,7 @@ const PagesPage = () => {
                 {paginatedPages.map(page => (                                                    // La fonction map = for de symfony, key = Sur quelle clé le map doit il opérer.
                     <tr key={page.id}>
                         <td>{page.id}</td>
-                        <td><Link to={"/pages/" + page.id}>page</Link></td>
+                        <td><Link to={"/pages/" + page.id}>{page.title}</Link></td>
 
                         <td>{formatDate(page.createAt)}</td>
                         <td>{formatDate(page.updateAt)}</td>

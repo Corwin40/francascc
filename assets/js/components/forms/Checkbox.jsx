@@ -1,23 +1,19 @@
 import React from 'react';
 
-const Checkbox = ({name, label, isOn, handleToggle}) => {
+const Checkbox = ({name, label, checked, onChange}) => {
     return (
         <div className="form-group">
-            <div className="custom-control custom-switch">
-                <input
-                    name={name}
-                    id={name}
-                    type="checkbox"
-                    className="custom-control-input"
-                    checked={isOn}
-                    onChange={handleToggle}
-                />
+            <div>
                 <label
-                    className="custom-control-label"
-                    htmlFor="customSwitch1"
-                >
-                    {label}
+                    htmlFor={name}>{label}
                 </label>
+                <input
+                    type="checkbox"
+                    id={name}
+                    name={name}
+                    checked={checked}
+                    onChange={onChange}
+                />
             </div>
         </div>
     )
