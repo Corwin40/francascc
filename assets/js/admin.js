@@ -26,8 +26,8 @@ import SitePage from "./pages/admin/site/SitePage"
 import UsersPage from "./pages/admin/Users/UsersPage"
 import UserPage from "./pages/admin/Users/userPage";
 import ArticlesPage from "./pages/Web/Articles/ArticlesPage";
-import PagesPage from "./pages/Web/pages/PagesPage";
-import PagePage from "./pages/Web/pages/PagePage"
+import ListPage from "./pages/Web/pages/ListPage";
+import PagePage from "./pages/Web/pages/EditPage"
 // imports API
 import AuthContext from "./contexts/AuthContext";
 import authAPI from "./services/admin/authAPI";
@@ -45,10 +45,8 @@ const Admin = () => {
     const handleChangeOpen = () => {
         if (!open){
             setOpen(true);
-            console.log(open);
         } else {
             setOpen(false);
-            console.log(open)
         }
     }
 
@@ -71,7 +69,7 @@ const Admin = () => {
                     <Switch>
                         <PrivateRoute path="/pages/:id" component={PagePage} />
                         <PrivateRoute path="/pages/new" component={PagePage} />
-                        <PrivateRoute path="/pages" component={PagesPage} />
+                        <PrivateRoute path="/pages" component={ListPage} />
 
                         <PrivateRoute path="/articles/:id" component={ArticlePage}/>
                         <PrivateRoute path="/articles/new" component={ArticlePage}/>

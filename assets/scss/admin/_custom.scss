@@ -113,6 +113,17 @@ body {
   width: calc(100% - #{$aside-large});
 }
 
+/********
+* REGLES PAGES UPDATE
+********/
+
+#op_zone_update{
+  background-color: #f1f1f1;
+  padding: 1rem;
+}
+
+
+
 
 .btn-xs, .btn-group-xs > .btn {
   padding: 0.15rem 0.4rem;

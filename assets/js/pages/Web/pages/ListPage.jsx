@@ -9,7 +9,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faEdit, faUserTimes, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import {Button, Modal} from "react-bootstrap";
 
-const PagesPage = () => {
+const ListPage = () => {
 
     // Déclaration des constantes React
     const [pages, setPages] = useState([]);
@@ -105,8 +105,10 @@ const PagesPage = () => {
                 <thead>
                 <tr>
                     <th>id</th>
-                    <th>Nom et Prénom</th>
-
+                    <th>Nom</th>
+                    <th>Etat</th>
+                    <th>Menu</th>
+                    <th>Sections</th>
                     <th>Créer le</th>
                     <th>Modifier le</th>
                     <th></th>
@@ -117,7 +119,9 @@ const PagesPage = () => {
                     <tr key={page.id}>
                         <td>{page.id}</td>
                         <td><Link to={"/pages/" + page.id}>{page.title}</Link></td>
-
+                        <td>{page.state}</td>
+                        <td>{page.isMenu}</td>
+                        <td>{page.sections}</td>
                         <td>{formatDate(page.createAt)}</td>
                         <td>{formatDate(page.updateAt)}</td>
                         <td className="float-right">
@@ -163,4 +167,4 @@ const PagesPage = () => {
     );
 };
 
-export default PagesPage;
+export default ListPage;

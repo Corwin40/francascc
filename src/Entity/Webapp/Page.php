@@ -8,9 +8,14 @@ use App\Repository\Webapp\PageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={
+ *          "groups"={"pages_read"}
+ *     }
+ * )
  * @ORM\Entity(repositoryClass=PageRepository::class)
  */
 class Page
@@ -19,67 +24,92 @@ class Page
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @Groups({"pages_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Groups({"pages_read"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Groups({"pages_read"})
      */
     private $slug;
 
     /**
      * @ORM\Column(type="string", length=100)
+     *
+     * @Groups({"pages_read"})
      */
     private $state;
 
     /**
      * @ORM\Column(type="boolean")
+     *
+     * @Groups({"pages_read"})
      */
     private $isMenu;
 
     /**
      * @ORM\Column(type="array", nullable=true)
+     *
+     * @Groups({"pages_read"})
      */
     private $metaKeywords = [];
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     *
+     * @Groups({"pages_read"})
      */
     private $metaDescription;
 
     /**
      * @ORM\Column(type="array", nullable=true)
+     *
+     * @Groups({"pages_read"})
      */
     private $tags = [];
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="pages")
+     *
+     * @Groups({"pages_read"})
      */
     private $author;
 
-
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @Groups({"pages_read"})
      */
     private $publishAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @Groups({"pages_read"})
      */
     private $publishEnd;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @Groups({"pages_read"})
      */
     private $createAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @Groups({"pages_read"})
      */
     private $updateAt;
 

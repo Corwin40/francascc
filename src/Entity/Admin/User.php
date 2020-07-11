@@ -106,6 +106,11 @@ class User implements UserInterface
      */
     private $pages;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=College::class, inversedBy="user")
+     */
+    private $college;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -320,6 +325,18 @@ class User implements UserInterface
                 $page->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCollege(): ?College
+    {
+        return $this->college;
+    }
+
+    public function setCollege(?College $college): self
+    {
+        $this->college = $college;
 
         return $this;
     }

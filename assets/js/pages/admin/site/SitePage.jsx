@@ -4,7 +4,7 @@ import Field from "../../../components/forms/Fields";
 import UsersAPI from "../../../services/admin/UsersAPI";
 import moment from "moment";
 import Checkbox from "../../../components/forms/Checkbox";
-import SiteAPI from "../../../services/admin/SiteAPI";
+import SiteAPI from "../../../services/admin/ConfigAPI";
 import {toast} from "react-toastify";
 
 const SitePage = ({match, history}) => {
