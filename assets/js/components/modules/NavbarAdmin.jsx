@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {NavLink} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 // imports Tools
 import authAPI from "../../services/admin/authAPI";
 import ConfigAPI from "../../services/admin/ConfigAPI";
@@ -66,7 +66,7 @@ const NavbarAdmin = ({history}) => {
                                 {user.firstName} {user.lastName} <FontAwesomeIcon icon={faUserCircle} />
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
-                                <Dropdown.Item>voir mon profil</Dropdown.Item>
+                                <Dropdown.Item href={"#/users/" + user.id}>voir mon profil</Dropdown.Item>
                                 <Dropdown.Item onClick={handleLogout}>Déconnexion</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>

@@ -6,7 +6,7 @@ import moment from "moment";
 import {toast} from "react-toastify";
 import Checkbox from "../../../components/forms/Checkbox";
 
-const UserPage = ({match, history}) => {
+const EditUser = ({match, history}) => {
 
     let date = new Date();
     const formatDate = (str) => moment(str).format('DD/MM/YYYY');
@@ -128,4 +128,4 @@ const UserPage = ({match, history}) => {
     )
 };
 
-export default UserPage;
+export default EditUser;

@@ -22,10 +22,10 @@ import PrivateRoute from "./components/tools/PrivateRoute";
 
 //import all pages
 import DashBoardPage from "./pages/admin/Dashboard";
-import SitePage from "./pages/admin/site/SitePage"
-import UsersPage from "./pages/admin/Users/UsersPage"
-import UserPage from "./pages/admin/Users/userPage";
-import ArticlesPage from "./pages/Web/Articles/ArticlesPage";
+import ViewSite from "./pages/admin/site/ViewSite"
+import ListUser from "./pages/admin/Users/ListUser"
+import EditUser from "./pages/admin/Users/EditUser";
+import ListArticles from "./pages/Web/Articles/ListArticles";
 import ListPage from "./pages/Web/pages/ListPage";
 import PagePage from "./pages/Web/pages/EditPage"
 // imports API
@@ -34,7 +34,11 @@ import authAPI from "./services/admin/authAPI";
 import LoginPage from "./pages/admin/LoginPage";
 import {toast, ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ArticlePage from "./pages/Web/Articles/ArticlePage";
+import EditArticles from "./pages/Web/Articles/EditArticles";
+import ViewUser from "./pages/admin/Users/ViewUser";
+import UserPage from "./pages/Web/pages/EditPage";
+import ListCollege from "./pages/admin/college/ListCollege";
+import EditCollege from "./pages/admin/college/EditCollege";
 
 authAPI.setup();
 
@@ -67,19 +71,25 @@ const Admin = () => {
                 <NavbarWithRouter/>
                 <div className="container-fluid pt-3">
                     <Switch>
+
+                        <PrivateRoute path="/colleges/:id" component={EditCollege} />
+                        <PrivateRoute path="/colleges/new" component={EditCollege} />
+                        <PrivateRoute path="/colleges/" component={ListCollege} />
+
                         <PrivateRoute path="/pages/:id" component={PagePage} />
                         <PrivateRoute path="/pages/new" component={PagePage} />
                         <PrivateRoute path="/pages" component={ListPage} />
 
-                        <PrivateRoute path="/articles/:id" component={ArticlePage}/>
-                        <PrivateRoute path="/articles/new" component={ArticlePage}/>
-                        <PrivateRoute path="/articles" component={ArticlesPage}/>
+                        <PrivateRoute path="/articles/:id" component={EditArticles}/>
+                        <PrivateRoute path="/articles/new" component={EditArticles}/>
+                        <PrivateRoute path="/articles" component={ListArticles}/>
 
-                        <PrivateRoute path="/site/:id" component={SitePage}/>
+                        <PrivateRoute path="/site/:id" component={ViewSite}/>
 
-                        <PrivateRoute path="/Users/new" component={UserPage} />
-                        <PrivateRoute path="/Users/:id" component={UserPage} />
-                        <PrivateRoute path="/Users" component={UsersPage} />
+                        <PrivateRoute path="/users/:id" component={ViewUser} />
+                        <PrivateRoute path="/users/new" component={EditUser} />
+                        <PrivateRoute path="/users/:id" component={EditUser} />
+                        <PrivateRoute path="/users" component={ListUser} />
 
                         <PrivateRoute path="/dashboard" component={DashBoardPage}/>
 

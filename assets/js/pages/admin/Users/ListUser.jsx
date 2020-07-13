@@ -11,7 +11,7 @@ import { faUserTimes } from '@fortawesome/free-solid-svg-icons';
 import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
 import {Button, Modal} from "react-bootstrap";
 
-const UsersPage = () => {
+const ListUser = () => {
 
     // Déclaration des constantes React
     const [users, setUsers] = useState([]);
@@ -43,7 +43,7 @@ const UsersPage = () => {
     const handleDelete = async id => {
         const originalUsers = [...users];                        // copie du tableau des customers
         setUsers(users.filter(user => user.id !== id));
-        setSh
+        setShowDelete(false);
         try {
             await UsersAPI.delete(id);
         }catch(error){
@@ -110,6 +110,8 @@ const UsersPage = () => {
                     <th>Nom et Prénom</th>
                     <th>Email</th>
                     <th>actif</th>
+                    <th>articles</th>
+                    <th>Pages</th>
                     <th>Créer le</th>
                     <th>Modifier le</th>
                     <th></th>
@@ -122,6 +124,12 @@ const UsersPage = () => {
                         <td><Link to={"/users/" + user.id}>{user.firstName} {user.lastName}</Link></td>
                         <td>{user.email}</td>
                         <td>{user.isActive > 0 && <p>Oui</p> || <p>Non</p> }</td>
+                        <td>
+                            {user.articles.length } crée(s)
+                        </td>
+                        <td>
+                            {user.pages.length } crée(s)
+                        </td>
                         <td>{formatDate(user.createAt)}</td>
                         <td>{formatDate(user.updateAt)}</td>
                         <td className="float-right">
@@ -169,4 +177,4 @@ const UsersPage = () => {
     );
 };
 
-export default UsersPage;
+export default ListUser;

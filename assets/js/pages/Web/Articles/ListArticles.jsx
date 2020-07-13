@@ -11,7 +11,7 @@ import {Modal, Button} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faEdit, faUserTimes, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
-const ArticlesPage = () => {
+const ListArticles = () => {
 
     // Déclaration des constantes React
     const [articles, setArticles] = useState([]);
@@ -93,7 +93,7 @@ const ArticlesPage = () => {
             <div className="row">
                 <div className="col-12">
                     <div className="alert alert-dismissible alert-light d-flex justify-content-between align-items-center mb-3">
-                        <h1>Tableau de bord : <small>Gestion des articles</small></h1>
+                        <h1>CONTENU : <small>Liste des articles</small></h1>
                     </div>
                 </div>
                 <div className="col-2">
@@ -173,4 +173,4 @@ const ArticlesPage = () => {
     );
 };
 
-export default ArticlesPage;
+export default ListArticles;

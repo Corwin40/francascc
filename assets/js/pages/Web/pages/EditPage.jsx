@@ -8,6 +8,7 @@ import {toast} from "react-toastify";
 import PagesAPI from "../../../services/webapp/PagesAPI";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
+import Card from "react-bootstrap/Card";
 
 const UserPage = ({match, history}) => {
 
@@ -89,18 +90,16 @@ const UserPage = ({match, history}) => {
             <div className="row">
                 <div className="col-12">
                     <div className="alert alert-dismissible alert-light d-flex justify-content-between align-items-center mb-3">
-                        <h1>Tableau de bord : <small>Gestion des Pages</small></h1>
+                        <h1>Page du site :<small>Ajout / Modification</small></h1>
                     </div>
                 </div>
             </div>
 
-            <div className="d-flex justify-content-between align-items-content mb-3">
-                {!editing && <h3>Création d'une nouvelle page</h3> || <h3>Modification de la page : {page.title}</h3>}
-            </div>
-
-            <div className="row" >
-                <div className="col-12">
-                    <form id="op_zone_update" onSubmit={handleSubmit}>
+            <Card border="secondary">
+                <Card.Header></Card.Header>
+                <Card.Body>
+                    <h3>{!editing && "Création d'une nouvelle page" || "Modification de la page : " + page.title}</h3>
+                    <form onSubmit={handleSubmit}>
                         <Field
                             name="title"
                             label="Titre de la page"
@@ -145,7 +144,6 @@ const UserPage = ({match, history}) => {
                             onChange={handleChange}
                             checked={page.isMenu}
                         />
-                        {editing && <p>{page.sections} sections crées</p>}
 
                         <div className="form-group">
                             {!editing && <button className="btn btn-sm btn-success mr-1">Ajouter</button> || <button className="btn btn-sm btn-success mr-1">Modifier</button>}
@@ -153,9 +151,8 @@ const UserPage = ({match, history}) => {
                         </div>
 
                     </form>
-                </div>
-
-            </div>
+                </Card.Body>
+            </Card>
 
         </>
     )

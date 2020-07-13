@@ -6,7 +6,7 @@ import moment from "moment";
 import Pagination from "../../../components/tools/Pagination";
 // Styles
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { faEdit, faUserTimes, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faUserTimes, faPlusCircle, faEye } from '@fortawesome/free-solid-svg-icons';
 import {Button, Modal} from "react-bootstrap";
 
 const ListPage = () => {
@@ -64,7 +64,8 @@ const ListPage = () => {
     // Moteur de recherche sur la requète
     const filteredPages = pages.filter(
         p =>
-            p.title.toLowerCase().includes(search.toLowerCase())
+            p.title.toLowerCase().includes(search.toLowerCase()) ||
+            p.author.toLowerCase().includes(search.toLowerCase())
     );
 
     // mise en place de l'alimentation des pages de paginations
@@ -89,7 +90,7 @@ const ListPage = () => {
             <div className="row">
                 <div className="col-12">
                     <div className="alert alert-dismissible alert-light d-flex justify-content-between align-items-center mb-3">
-                        <h1>Tableau de bord : <small>Gestion des Pages</small></h1>
+                        <h1>Page du site : <small>Listing</small></h1>
                     </div>
                 </div>
                 <div className="col-2">
@@ -118,10 +119,10 @@ const ListPage = () => {
                 {paginatedPages.map(page => (                                                    // La fonction map = for de symfony, key = Sur quelle clé le map doit il opérer.
                     <tr key={page.id}>
                         <td>{page.id}</td>
-                        <td><Link to={"/pages/" + page.id}>{page.title}</Link></td>
+                        <td><Link to={"/pages/" + page.id}><FontAwesomeIcon icon={faEye} /> {page.title}</Link></td>
                         <td>{page.state}</td>
                         <td>{page.isMenu}</td>
-                        <td>{page.sections}</td>
+                        <td>{page.sections.length} crées</td>
                         <td>{formatDate(page.createAt)}</td>
                         <td>{formatDate(page.updateAt)}</td>
                         <td className="float-right">

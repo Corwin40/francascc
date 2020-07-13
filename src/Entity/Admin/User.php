@@ -98,16 +98,22 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Articles::class, mappedBy="author")
+     *
+     * @Groups({"users_read"})
      */
     private $articles;
 
     /**
      * @ORM\OneToMany(targetEntity=Page::class, mappedBy="author")
+     *
+     * @Groups({"users_read"})
      */
     private $pages;
 
     /**
      * @ORM\ManyToOne(targetEntity=College::class, inversedBy="user")
+     *
+     * @Groups({"users_read"})
      */
     private $college;
 

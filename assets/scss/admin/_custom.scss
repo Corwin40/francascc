@@ -103,6 +103,7 @@ body {
   position: fixed; /* Stay in place */
   left: $aside-width;
   width: calc(100% - #{$aside-width});
+  height: 100%;
 }
 
 .main-large {
@@ -111,6 +112,7 @@ body {
   position: fixed; /* Stay in place */
   left: $aside-large;
   width: calc(100% - #{$aside-large});
+  height: 100%;
 }
 
 /********

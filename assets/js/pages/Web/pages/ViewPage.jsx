@@ -96,61 +96,9 @@ const UserPage = ({match, history}) => {
             </div>
 
             <Card border="secondary">
-                <Card.Header></Card.Header>
+                <Card.Header>Informations</Card.Header>
                 <Card.Body>
-                    <h3>{!editing && "Création d'une nouvelle page" || "Modification de la page : " + page.title}</h3>
-                    <form onSubmit={handleSubmit}>
-                        <Field
-                            name="title"
-                            label="Titre de la page"
-                            placeholder=""
-                            type="text"
-                            value={page.title}
-                            onChange={handleChange}
-                            error={errors.title}
-                        />
-                        <Field
-                            name="slug"
-                            label="slug"
-                            placeholder=""
-                            type="text"
-                            value={page.slug}
-                            onChange={handleChange}
-                            error={errors.slug}
-                        />
-                        <Field
-                            name="metaKeyword"
-                            label="KeyWords"
-                            placeholder=""
-                            type="text"
-                            value={page.metaKeyword}
-                            onChange={handleChange}
-                            error={errors.definition}
-                        />
-
-                        <Field
-                            name="metaDescription"
-                            label="Description"
-                            placeholder=""
-                            type="text"
-                            value={page.metaDescription}
-                            onChange={handleChange}
-                            error={errors.definition}
-                        />
-
-                        <Checkbox
-                            name="isMenu"
-                            label="Utiliser cette page comme menu du site"
-                            onChange={handleChange}
-                            checked={page.isMenu}
-                        />
-
-                        <div className="form-group">
-                            {!editing && <button className="btn btn-sm btn-success mr-1">Ajouter</button> || <button className="btn btn-sm btn-success mr-1">Modifier</button>}
-                            <Link to="/pages" className="btn btn-sm btn-secondary">Retour à la liste</Link>
-                        </div>
-
-                    </form>
+                    <b>titre de la page</b>
                 </Card.Body>
             </Card>
 

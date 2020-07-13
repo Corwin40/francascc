@@ -32,7 +32,7 @@ class Page
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Groups({"pages_read"})
+     * @Groups({"pages_read", "users_read"})
      */
     private $title;
 
@@ -115,6 +115,8 @@ class Page
 
     /**
      * @ORM\OneToMany(targetEntity=Section::class, mappedBy="page")
+     *
+     * @Groups({"pages_read"})
      */
     private $sections;
 

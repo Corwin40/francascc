@@ -4,7 +4,7 @@ namespace App\Entity\Webapp;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Entity\Admin\User;
-use App\Repository\Webapp\ArticleRepository;
+use App\Repository\Webapp\ArticlesRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "groups"={"articles_read"}
  *     }
  * )
- * @ORM\Entity(repositoryClass=ArticleRepository::class)
+ * @ORM\Entity(repositoryClass=ArticlesRepository::class)
  */
 class Articles
 {
@@ -30,7 +30,7 @@ class Articles
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Groups({"articles_read"})
+     * @Groups({"articles_read", "users_read"})
      */
     private $title;
 

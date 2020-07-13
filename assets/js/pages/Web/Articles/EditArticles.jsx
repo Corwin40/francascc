@@ -12,7 +12,7 @@ import ArticlesAPI from "../../../services/webapp/ArticlesAPI";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
 
-const ArticlePage = ({match, history}) => {
+const EditArticles = ({match, history}) => {
 
     let date = new Date();
     const formatDate = (str) => moment(str).format('DD/MM/YYYY');
@@ -88,7 +88,7 @@ const ArticlePage = ({match, history}) => {
             <div className="row">
                 <div className="col-12">
                     <div className="alert alert-dismissible alert-light d-flex justify-content-between align-items-center mb-3">
-                        <h1>Tableau de bord : <small>Gestion des articles</small></h1>
+                        <h1>CONTENU : <small>Ajout / Modification </small></h1>
                     </div>
                 </div>
             </div>
@@ -135,4 +135,4 @@ const ArticlePage = ({match, history}) => {
     )
 };
 
-export default ArticlePage;
+export default EditArticles;

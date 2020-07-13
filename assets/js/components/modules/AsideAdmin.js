@@ -2,9 +2,7 @@ import React, {useContext, useState} from 'react';
 import {Link, NavLink} from "react-router-dom";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faArrowAltCircleRight, faArrowAltCircleDown, faUser, faGlobe, faPenSquare, faFileAlt, faBook, faCog} from '@fortawesome/free-solid-svg-icons';
-import Accordion from "react-bootstrap/Accordion";
-import Button from "react-bootstrap/cjs/Button";
+import {faArrowAltCircleRight, faArrowAltCircleDown, faUser, faGlobe, faPenSquare, faFileAlt, faBook, faCog, faBuilding} from '@fortawesome/free-solid-svg-icons';
 
 const AsideAdmin = ({open, handleChangeOpen}) => {
 
@@ -26,6 +24,12 @@ const AsideAdmin = ({open, handleChangeOpen}) => {
                 </div>
                 <nav className="mt-2">
                     <ul className="nav nav-pills nav-sidebar flex-column">
+                        <li>
+                            <Link to={"/colleges"}>
+                                <FontAwesomeIcon icon={faBuilding}/>
+                                <p>COLLEGE</p>
+                            </Link>
+                        </li>
                         <li>
                             <a>
                                 <FontAwesomeIcon icon={faBook}/>

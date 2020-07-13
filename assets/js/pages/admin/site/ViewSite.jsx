@@ -7,7 +7,7 @@ import Checkbox from "../../../components/forms/Checkbox";
 import SiteAPI from "../../../services/admin/ConfigAPI";
 import {toast} from "react-toastify";
 
-const SitePage = ({match, history}) => {
+const ViewSite = ({match, history}) => {
 
     let date = new Date();
     const formatDate = (str) => moment(str).format('DD/MM/YYYY');
@@ -136,4 +136,4 @@ const SitePage = ({match, history}) => {
     )
 };
 
-export default SitePage;
+export default ViewSite;
