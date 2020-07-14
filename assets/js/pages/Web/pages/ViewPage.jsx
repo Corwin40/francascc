@@ -1,14 +1,18 @@
+// imports tools et React
 import React, {useState, useEffect} from 'react';
 import {Link} from "react-router-dom";
-import Field from "../../../components/forms/Fields";
-import UsersAPI from "../../../services/admin/UsersAPI";
 import moment from "moment";
-import Checkbox from "../../../components/forms/Checkbox";
 import {toast} from "react-toastify";
 import PagesAPI from "../../../services/webapp/PagesAPI";
+// import des icons
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
+import {faPlusCircle, faMinusCircle} from "@fortawesome/free-solid-svg-icons";
+// import bootstrap react
 import Card from "react-bootstrap/Card";
+import Checkbox from "../../../components/forms/Checkbox";
+import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
+import ListSections from "../sections/ListSections";
 
 const UserPage = ({match, history}) => {
 
@@ -24,7 +28,9 @@ const UserPage = ({match, history}) => {
         state:'',
         metaKeyword:'',
         metaDescription:'' ,
-        isMenu:false
+        isMenu:false,
+        sections:'',
+        author:''
     });
 
     const [errors, setErrors] = useState({
@@ -33,14 +39,16 @@ const UserPage = ({match, history}) => {
         state:'',
         metaKeyword:'',
         metaDescription:'' ,
-        isMenu:''
+        isMenu:'',
+        sections:"",
+        author:''
     });
 
     // Récupère les données correspondant à l'id transmise pour une modification
     const fetchPage = async id =>{
         try{
-            const {title, slug, state, metaKeyword, metaDescription ,isMenu, sections} = await PagesAPI.findOne(id);
-            setPage({title, slug, state, metaKeyword, metaDescription ,isMenu, sections})
+            const {title, slug, state, metaKeyword, metaDescription ,isMenu, author, sections} = await PagesAPI.findOne(id);
+            setPage({title, slug, state, metaKeyword, metaDescription ,isMenu, author, sections})
         } catch (error) {
             console.log(error.response);
         }
@@ -84,23 +92,42 @@ const UserPage = ({match, history}) => {
             }
         }
     };
+    const addSection = () =>{
+
+    }
 
     return (
         <>
             <div className="row">
                 <div className="col-12">
                     <div className="alert alert-dismissible alert-light d-flex justify-content-between align-items-center mb-3">
-                        <h1>Page du site <small>Ajout / Modification</small></h1>
+                        <h1>Page : {page.title} </h1>
                     </div>
                 </div>
             </div>
+            <div className="row">
+                <div className="col-sm-12 col-lg-3">
+                    <h3>INFORMATIONS</h3>
+                    <hr/>
+                    <p>
+                    <b>Titre : </b>{page.title}<br/>
+                    <b>Auteur : </b>{page.author.firstName} {page.author.lastName}
+                    </p>
+                    <p>sections : {page.sections.length}</p>
 
-            <Card border="secondary">
-                <Card.Header>Informations</Card.Header>
-                <Card.Body>
-                    <b>titre de la page</b>
-                </Card.Body>
-            </Card>
+                </div>
+                <div className="col-sm-12 col-lg-9">
+                    <h3>LISTES DES SECTIONS</h3>
+                    <hr/>
+                    <div className="op_toolbar_view">
+                        <Button variant="outline-primary" size="sm" onClick={addSection}><FontAwesomeIcon icon={faPlusCircle}/> Sections</Button>
+                        <Button variant="outline-primary" size="sm" onClick={addSection}><FontAwesomeIcon icon={faMinusCircle}/> Sections</Button>
+                    </div>
+                    <ListSections/>
+                </div>
+            </div>
+
+
 
         </>
     )

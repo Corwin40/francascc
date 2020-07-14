@@ -23,22 +23,23 @@ import PrivateRoute from "./components/tools/PrivateRoute";
 //import all pages
 import DashBoardPage from "./pages/admin/Dashboard";
 import ViewSite from "./pages/admin/site/ViewSite"
-import ListUser from "./pages/admin/Users/ListUser"
-import EditUser from "./pages/admin/Users/EditUser";
-import ListArticles from "./pages/Web/Articles/ListArticles";
+import ListUser from "./pages/admin/users/ListUser"
+import EditUser from "./pages/admin/users/EditUser";
+import ListArticles from "./pages/Web/articles/ListArticles";
 import ListPage from "./pages/Web/pages/ListPage";
-import PagePage from "./pages/Web/pages/EditPage"
+import PagePage from "./pages/Web/pages/EditPage";
+import EditArticles from "./pages/Web/articles/EditArticles";
+import ViewUser from "./pages/admin/users/ViewUser";
+import ListCollege from "./pages/admin/college/ListCollege";
+import EditCollege from "./pages/admin/college/EditCollege";
+import ViewPage from "./pages/Web/pages/ViewPage";
 // imports API
 import AuthContext from "./contexts/AuthContext";
 import authAPI from "./services/admin/authAPI";
 import LoginPage from "./pages/admin/LoginPage";
 import {toast, ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import EditArticles from "./pages/Web/Articles/EditArticles";
-import ViewUser from "./pages/admin/Users/ViewUser";
-import UserPage from "./pages/Web/pages/EditPage";
-import ListCollege from "./pages/admin/college/ListCollege";
-import EditCollege from "./pages/admin/college/EditCollege";
+
 
 authAPI.setup();
 
@@ -76,6 +77,7 @@ const Admin = () => {
                         <PrivateRoute path="/colleges/new" component={EditCollege} />
                         <PrivateRoute path="/colleges/" component={ListCollege} />
 
+                        <PrivateRoute path="/pages/view/:id" component={ViewPage} />
                         <PrivateRoute path="/pages/:id" component={PagePage} />
                         <PrivateRoute path="/pages/new" component={PagePage} />
                         <PrivateRoute path="/pages" component={ListPage} />

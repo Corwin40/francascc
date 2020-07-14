@@ -116,7 +116,18 @@ body {
 }
 
 /********
-* REGLES PAGES UPDATE
+* REGLES PAGES View
+********/
+
+.op_toolbar_view{
+  margin: 0.3rem 0;
+}
+.op_toolbar_view > .btn {
+  margin-right: 0.3rem;
+}
+
+/********
+* REGLES PAGES Update
 ********/
 
 #op_zone_update{

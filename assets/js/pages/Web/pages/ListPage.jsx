@@ -119,7 +119,7 @@ const ListPage = () => {
                 {paginatedPages.map(page => (                                                    // La fonction map = for de symfony, key = Sur quelle clé le map doit il opérer.
                     <tr key={page.id}>
                         <td>{page.id}</td>
-                        <td><Link to={"/pages/" + page.id}><FontAwesomeIcon icon={faEye} /> {page.title}</Link></td>
+                        <td><Link to={"/pages/view/" + page.id}><FontAwesomeIcon icon={faEye} /> {page.title}</Link></td>
                         <td>{page.state}</td>
                         <td>{page.isMenu}</td>
                         <td>{page.sections.length} crées</td>

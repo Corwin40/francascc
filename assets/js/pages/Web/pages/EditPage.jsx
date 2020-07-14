@@ -6,9 +6,11 @@ import moment from "moment";
 import Checkbox from "../../../components/forms/Checkbox";
 import {toast} from "react-toastify";
 import PagesAPI from "../../../services/webapp/PagesAPI";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
 import Card from "react-bootstrap/Card";
+import {Form} from "react-bootstrap";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
 
 const UserPage = ({match, history}) => {
 
@@ -90,67 +92,113 @@ const UserPage = ({match, history}) => {
             <div className="row">
                 <div className="col-12">
                     <div className="alert alert-dismissible alert-light d-flex justify-content-between align-items-center mb-3">
-                        <h1>Page du site :<small>Ajout / Modification</small></h1>
+                        <h1>Page du site : <small>Ajout / Modification</small></h1>
                     </div>
                 </div>
             </div>
 
             <Card border="secondary">
-                <Card.Header></Card.Header>
+                <Card.Header>{!editing && "Création d'une nouvelle page" || "Modification de la page : " + page.title}</Card.Header>
                 <Card.Body>
-                    <h3>{!editing && "Création d'une nouvelle page" || "Modification de la page : " + page.title}</h3>
-                    <form onSubmit={handleSubmit}>
-                        <Field
-                            name="title"
-                            label="Titre de la page"
-                            placeholder=""
-                            type="text"
-                            value={page.title}
-                            onChange={handleChange}
-                            error={errors.title}
-                        />
-                        <Field
-                            name="slug"
-                            label="slug"
-                            placeholder=""
-                            type="text"
-                            value={page.slug}
-                            onChange={handleChange}
-                            error={errors.slug}
-                        />
-                        <Field
-                            name="metaKeyword"
-                            label="KeyWords"
-                            placeholder=""
-                            type="text"
-                            value={page.metaKeyword}
-                            onChange={handleChange}
-                            error={errors.definition}
-                        />
+                    <Form onSubmit={handleSubmit}>
+                        <p><b>INFORMATIONS</b></p>
+                        <hr/>
+                        <Form.Row>
+                            <Col>
+                                <Form.Group as={Row} controlId="formPlaintextPassword">
+                                    <Form.Label size="sm" column sm="2">
+                                        Titre
+                                    </Form.Label>
+                                    <Col sm="4">
+                                        <Form.Control
+                                            name="title"
+                                            size="sm"
+                                            type="text"
+                                            placeholder="Titre"
+                                            value={page.title}
+                                            onChange={handleChange}
+                                            error={errors.title}
+                                        />
+                                    </Col>
+                                    <Form.Label size="sm" column sm="2">
+                                        alias :
+                                    </Form.Label>
+                                    <Col sm="4">
+                                        <Form.Control
+                                            name="slug"
+                                            size="sm"
+                                            type="text"
+                                            placeholder="Titre"
+                                            value={page.slug}
+                                            onChange={handleChange}
+                                            error={errors.slug}
+                                        />
+                                    </Col>
+                                </Form.Group>
 
-                        <Field
-                            name="metaDescription"
-                            label="Description"
-                            placeholder=""
-                            type="text"
-                            value={page.metaDescription}
-                            onChange={handleChange}
-                            error={errors.definition}
-                        />
+                            </Col>
+                        </Form.Row>
+                        <p><b>METADONNEES</b></p>
+                        <hr/>
+                        <Form.Row>
+                            <Col>
+                                <Form.Group as={Row} controlId="formPlaintextPassword">
+                                    <Form.Label size="sm" column sm="2">
+                                        Mots Clefs
+                                    </Form.Label>
+                                    <Col sm="4">
+                                        <Form.Control
+                                            name="metaKeyword"
+                                            label="Mots clef"
+                                            placeholder="Mots clef"
+                                            type="text"
+                                            value={page.metaKeyword}
+                                            onChange={handleChange}
+                                            error={errors.definition}
+                                            size="sm"
+                                        />
+                                    </Col>
+                                </Form.Group>
+                            </Col>
+                        </Form.Row>
+                        <Form.Row>
+                            <Col>
+                                <Form.Group as={Row} controlId="formPlaintextPassword">
+                                    <Form.Label size="sm" column sm="2">
+                                        Description
+                                    </Form.Label>
+                                    <Col sm="4">
+                                        <Form.Control
+                                            name="metaDescription"
+                                            label="Description"
+                                            placeholder="Description"
+                                            type="text"
+                                            value={page.metaDescription}
+                                            onChange={handleChange}
+                                            error={errors.definition}
+                                            size="sm"
+                                        />
+                                    </Col>
+                                </Form.Group>
+                            </Col>
+                        </Form.Row>
+                        <Form.Row>
+                            <Col>
+                                <Form.Check
+                                    type="switch"
+                                    id="isMenu"
+                                    name="isMenu"
+                                    label="Utiliser cette page comme menu du site"
+                                    onChange={handleChange}
+                                    checked={page.isMenu}
+                                />
+                            </Col>
+                        </Form.Row>
 
-                        <Checkbox
-                            name="isMenu"
-                            label="Utiliser cette page comme menu du site"
-                            onChange={handleChange}
-                            checked={page.isMenu}
-                        />
+                        {!editing && <Button type="submit" className="btn btn-sm btn-success mr-1">Ajouter</Button> || <Button  type="submit"className="btn btn-sm btn-success mr-1">Modifier</Button>}
+                        <Link to="/pages" className="btn btn-sm btn-secondary">Retour à la liste</Link>
 
-                        <div className="form-group">
-                            {!editing && <button className="btn btn-sm btn-success mr-1">Ajouter</button> || <button className="btn btn-sm btn-success mr-1">Modifier</button>}
-                            <Link to="/pages" className="btn btn-sm btn-secondary">Retour à la liste</Link>
-                        </div>
-
-                    </form>
+                    </Form>
                 </Card.Body>
             </Card>
 
