@@ -2,13 +2,21 @@
 
 namespace App\Entity\Admin;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\Admin\CollegeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CollegeRepository::class)
+ *
+ * @ApiResource(
+ *     normalizationContext={
+        "groups"={"colleges_read"}
+ *     }
+ * )
  */
 class College
 {
@@ -16,71 +24,99 @@ class College
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @Groups({"colleges_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Groups({"colleges_read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Groups({"colleges_read"})
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Groups({"colleges_read"})
      */
     private $complement;
 
     /**
      * @ORM\Column(type="string", length=5, nullable=true)
+     *
+     * @Groups({"colleges_read"})
      */
     private $zipcode;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     *
+     * @Groups({"colleges_read"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     *
+     * @Groups({"colleges_read"})
      */
     private $collegeEmail;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     *
+     * @Groups({"colleges_read"})
      */
     private $groupEmail;
 
     /**
      * @ORM\Column(type="string", length=14, nullable=true)
+     * @Groups({"colleges_read"})
+     *
      */
     private $collegePhone;
 
     /**
      * @ORM\Column(type="string", length=14, nullable=true)
+     *
+     * @Groups({"colleges_read"})
      */
     private $groupPhone;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     *
+     * @Groups({"colleges_read"})
      */
     private $animateur;
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="college")
+     *
+     * @Groups({"colleges_read"})
      */
     private $user;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @Groups({"colleges_read"})
      */
     private $createAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @Groups({"colleges_read"})
      */
     private $updateAt;
 
@@ -262,9 +298,12 @@ class College
         return $this->createAt;
     }
 
-    public function setCreateAt(?\DateTimeInterface $createAt): self
+    /**
+     * @ORM\PrePersist()
+     */
+    public function setCreateAt(): self
     {
-        $this->createAt = $createAt;
+        $this->createAt = new \DateTime();
 
         return $this;
     }
@@ -274,10 +313,15 @@ class College
         return $this->updateAt;
     }
 
-    public function setUpdateAt(?\DateTimeInterface $updateAt): self
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function setUpdateAt(): self
     {
-        $this->updateAt = $updateAt;
+        $this->updateAt = new \DateTime();
 
         return $this;
     }
+
 }

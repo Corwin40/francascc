@@ -88,7 +88,7 @@ const Admin = () => {
 
                         <PrivateRoute path="/site/:id" component={ViewSite}/>
 
-                        <PrivateRoute path="/users/:id" component={ViewUser} />
+                        <PrivateRoute path="/users/view/:id" component={ViewUser} />
                         <PrivateRoute path="/users/new" component={EditUser} />
                         <PrivateRoute path="/users/:id" component={EditUser} />
                         <PrivateRoute path="/users" component={ListUser} />

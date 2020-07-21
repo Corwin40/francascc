@@ -250,6 +250,11 @@ class Page
         return $this;
     }
 
+    public function getCreateAt(): ?\DateTimeInterface
+    {
+        return $this->createAt;
+    }
+
     /**
      * @ORM\PrePersist()
      */

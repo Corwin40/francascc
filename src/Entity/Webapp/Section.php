@@ -5,9 +5,15 @@ namespace App\Entity\Webapp;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\Webapp\SectionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={
+        "groups"={"sections_read"}
+ *     }
+ * )
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass=SectionRepository::class)
  */
 class Section
@@ -16,32 +22,43 @@ class Section
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @Groups({"sections_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=100)
+     *
+     * @Groups({"sections_read"})
      */
     private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity=Page::class, inversedBy="sections")
+     *
+     * @Groups({"sections_read"})
      */
     private $page;
 
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
+     *
+     * @Groups({"sections_read"})
      */
     private $className;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @Groups({"sections_read"})
      */
     private $createAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     */
+     *
+ * @Groups({"sections_read"})     */
     private $updateAt;
 
     public function getId(): ?int
@@ -85,14 +102,12 @@ class Section
         return $this;
     }
 
-    public function getCreateAt(): ?\DateTimeInterface
+    /**
+     * @ORM\PrePersist()
+     */
+    public function setCreateAt(): self
     {
-        return $this->createAt;
-    }
-
-    public function setCreateAt(?\DateTimeInterface $createAt): self
-    {
-        $this->createAt = $createAt;
+        $this->createAt = new \DateTime();
 
         return $this;
     }
@@ -102,9 +117,13 @@ class Section
         return $this->updateAt;
     }
 
-    public function setUpdateAt(?\DateTimeInterface $updateAt): self
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function setUpdateAt(): self
     {
-        $this->updateAt = $updateAt;
+        $this->updateAt = new \DateTime();
 
         return $this;
     }

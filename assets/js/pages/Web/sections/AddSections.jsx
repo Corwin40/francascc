@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 
+import {Modal, Button} from "react-bootstrap";
+
 const AddSections = () => {
+
 
     const [section, setSections] = useState({
         name:'',
@@ -15,12 +18,8 @@ const AddSections = () => {
         }
     );
 
-
-
     return (
-        <div>
-
-        </div>
+        <div></div>
     );
 };
 

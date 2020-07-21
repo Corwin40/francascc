@@ -48,7 +48,6 @@ const ListUser = () => {
             await UsersAPI.delete(id);
         }catch(error){
             setUsers(originalUsers);
-            console.log(error.response);
         }
     };
 
@@ -77,12 +76,11 @@ const ListUser = () => {
         itemsPerPage
     );
 
-    // Modal de suppression - ouverture
+    // Modal de suppression - fermeture
     const handleDeleteClose = () => setShowDelete(false);
-    //Modal de suppression - fermeture
+    //Modal de suppression - ouverture
     const handleDeleteShow = (user) => {
         setDeletedUser(user);
-        console.log(DeletedUser);
         setShowDelete(true);
     }
 
@@ -121,7 +119,7 @@ const ListUser = () => {
                 {paginatedUsers.map(user => (                                                    // La fonction map = for de symfony, key = Sur quelle clé le map doit il opérer.
                     <tr key={user.id}>
                         <td>{user.id}</td>
-                        <td><Link to={"/users/" + user.id}>{user.firstName} {user.lastName}</Link></td>
+                        <td><Link to={"/users/view/" + user.id}>{user.firstName} {user.lastName}</Link></td>
                         <td>{user.email}</td>
                         <td>{user.isActive > 0 && <p>Oui</p> || <p>Non</p> }</td>
                         <td>
@@ -137,7 +135,11 @@ const ListUser = () => {
                                 className="btn btn-sm btn-primary mr-1"
                                 to={"/users/" + user.id}><FontAwesomeIcon icon={faEdit} />
                             </Link>
-                            <Button variant="danger" onClick={() => handleDeleteShow(user)} size="sm">
+                            <Button
+                                variant="danger"
+                                onClick={handleDeleteShow}
+                                size="sm">
+
                                 <FontAwesomeIcon icon={faUserTimes} />
                             </Button>
                         </td>
