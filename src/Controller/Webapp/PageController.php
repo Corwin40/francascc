@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Controller\Webapp;
+
+use App\Entity\Webapp\Page;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
+
+/**
+ * Class PageController
+ * @package App\Controller\Webapp
+ * @Route("/webapp/page", name="op_webapp_page_")
+ */
+class PageController extends AbstractController
+{
+    /**
+     * @Route("/", name="index")
+     */
+    public function index()
+    {
+        return $this->render('webapp/page/index.html.twig', [
+            'controller_name' => 'PageController',
+        ]);
+    }
+
+    /**
+     * Liste toutes les pages de menu
+     * @Route("/listmenu", name="index")
+     */
+    public function listmenu()
+    {
+        $pages = $this->getDoctrine()
+            ->getRepository(Page::class)
+            ->ListMenu();
+
+        if (!$pages) {
+            throw $this->createNotFoundException(
+                'aucune page actuellement'
+            );
+        }
+
+        return $this->render('webapp/page/listmenu.html.twig',[
+            'pages' => $pages,
+        ]);
+    }
+
+
+}
