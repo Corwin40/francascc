@@ -47,4 +47,16 @@ class SectionRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function ListAllSections($page)
+    {
+        return $this->createQueryBuilder('s')
+            ->leftJoin('s.page', 'p')
+            ->andWhere('p.id = :page')
+            ->setParameter('page', $page)
+            ->orderBy('s.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

@@ -43,6 +43,18 @@ const AsideAdmin = ({open, handleChangeOpen}) => {
                             </Link>
                         </li>
                         <li className="nav-item">
+                            <Link to="#">
+                                <FontAwesomeIcon icon={faFileAlt}/>
+                                <p>Header</p>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="#">
+                                <FontAwesomeIcon icon={faFileAlt}/>
+                                <p>Footer</p>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
                             <Link to={"/articles"}>
                                 <FontAwesomeIcon icon={faPenSquare}/>
                                 <p>Articles</p>

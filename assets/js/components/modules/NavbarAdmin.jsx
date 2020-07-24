@@ -49,7 +49,7 @@ const NavbarAdmin = ({history}) => {
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
-                        <NavLink className="nav-link" to="/recos">notifications<span className="sr-only">(current)</span></NavLink>
+                        <a className="nav-link" href="http://127.0.0.1:8000">Voir le site</a>
                     </li>
                     {(!isAuthenticated && (
                         <>

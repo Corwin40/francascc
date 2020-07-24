@@ -13,12 +13,11 @@
         {% block header %}
             {{ render(controller('App\\Controller\\Webapp\\PageController::listmenu')) }}
         {% endblock %}
-        <div class="container-fluid">
-            {% block body %}
+        <main>
+        {% block body %}
+        {% endblock %}
+        </main>
 
-
-            {% endblock %}
-        </div>
 
 
         {% block footer %}

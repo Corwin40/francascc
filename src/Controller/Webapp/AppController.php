@@ -37,6 +37,9 @@ class AppController extends AbstractController
             );
         }
 
-        return $this->render('webapp/app/page.html.twig');
+
+        return $this->render('webapp/app/page.html.twig', [
+            'page' => $page
+        ]);
     }
 }
