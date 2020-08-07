@@ -1,5 +1,5 @@
-@import "~bootswatch/dist/flatly/variables";
 @import "~bootstrap/scss/bootstrap";
-@import "~bootswatch/dist/flatly/bootswatch";
-
+// Import du style personnel
 @import "./app/custom";
+// Style d'adaptation pour bootstrap
+@import "admin/bootstrap";

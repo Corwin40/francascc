@@ -2,6 +2,7 @@
 
 namespace App\Controller\Webapp;
 
+use App\Entity\Admin\Config;
 use App\Entity\Webapp\Page;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,6 +19,11 @@ class AppController extends AbstractController
      */
     public function index()
     {
+        $config = $this->getDoctrine()->getRepository(Config::class)->find(1);
+        if(!$config)
+        {
+            return $this->redirectToRoute('op_admin_firstinstall');
+        }
         return $this->render('webapp/app/index.html.twig');
     }
 
@@ -42,4 +48,14 @@ class AppController extends AbstractController
             'page' => $page
         ]);
     }
+
+    /**
+     * Page React de connexion de l'espace college (espcoll)
+     * @Route("/admin/espcoll", name="espcoll")
+     */
+    public function college()
+    {
+        return $this->render('webapp/app/espcoll.html.twig');
+    }
+
 }

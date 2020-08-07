@@ -33,12 +33,6 @@ class PageController extends AbstractController
             ->getRepository(Page::class)
             ->ListMenu();
 
-        if (!$pages) {
-            throw $this->createNotFoundException(
-                'aucune page actuellement'
-            );
-        }
-
         return $this->render('webapp/page/listmenu.html.twig',[
             'pages' => $pages,
         ]);
