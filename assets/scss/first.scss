@@ -1,0 +1,23 @@
+@import "~bootswatch/dist/flatly/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/flatly/bootswatch";
+
+// Style d'adaptation pour bootstrap
+@import "admin/bootstrap";
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5f5f5;
+  line-height: 1.5;
+  word-break: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+
+#op_first_header{
+  height: 3rem;
+  background: #95a5a6;
+}
+
+main .card {
+  margin-top: 0.3rem;
+}

@@ -11,9 +11,8 @@ import '../scss/admin.scss';
 const $ = require('jquery');
 require('bootstrap');
 
-import react, {useState} from "react";
+import React, {useState} from "react";
 import ReactDOM from 'react-dom';
-import React from "react";
 import {HashRouter, Switch, Route, withRouter} from "react-router-dom";
 //import Tools
 import NavbarAdmin from "./components/modules/NavbarAdmin";

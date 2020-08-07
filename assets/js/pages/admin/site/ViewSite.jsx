@@ -6,7 +6,6 @@ import moment from "moment";
 import Checkbox from "../../../components/forms/Checkbox";
 import SiteAPI from "../../../services/admin/ConfigAPI";
 import {toast} from "react-toastify";
-import Nav from "react-bootstrap/Nav";
 
 const ViewSite = ({match, history}) => {
 
@@ -79,10 +78,16 @@ const ViewSite = ({match, history}) => {
 
     return (
         <>
+            <div className="row">
+                <div className="col-12">
+                    <h3>Configuration du site</h3>
+                    <hr/>
+                </div>
+            </div>
             <nav>
                 <div className="nav nav-tabs" id="nav-tab" role="tablist">
                     <a className="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
-                       role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+                       role="tab" aria-controls="nav-home" aria-selected="true">Général</a>
                     <a className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
                        role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
                     <a className="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
