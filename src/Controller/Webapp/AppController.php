@@ -51,7 +51,7 @@ class AppController extends AbstractController
 
     /**
      * Page React de connexion de l'espace college (espcoll)
-     * @Route("/admin/espcoll", name="espcoll")
+     * @Route("/admin/espcoll/", name="espcoll")
      */
     public function college()
     {

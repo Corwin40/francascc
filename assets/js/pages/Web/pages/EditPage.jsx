@@ -1,16 +1,22 @@
+// Imports des composants natif de react
 import React, {useState, useEffect} from 'react';
 import {Link} from "react-router-dom";
-import Field from "../../../components/forms/Fields";
-import UsersAPI from "../../../services/admin/UsersAPI";
+
+// Imports des outils (tools)
 import moment from "moment";
-import Checkbox from "../../../components/forms/Checkbox";
 import {toast} from "react-toastify";
 import PagesAPI from "../../../services/webapp/PagesAPI";
-import Card from "react-bootstrap/Card";
+
+// Imports des élements Bootstrap React
 import {Form} from "react-bootstrap";
+import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+
+// Imports des composants de formulaires
 import Button from "react-bootstrap/Button";
+import Checkbox from "../../../components/forms/Checkbox";
+import Select from 'react-select';
 
 const UserPage = ({match, history}) => {
 
@@ -24,7 +30,7 @@ const UserPage = ({match, history}) => {
         title:'',
         slug:'',
         state:'',
-        metaKeyword:'',
+        metaKeywords:'',
         metaDescription:'' ,
         isMenu:false
     });
@@ -41,8 +47,8 @@ const UserPage = ({match, history}) => {
     // Récupère les données correspondant à l'id transmise pour une modification
     const fetchPage = async id =>{
         try{
-            const {title, slug, state, metaKeyword, metaDescription ,isMenu, sections} = await PagesAPI.findOne(id);
-            setPage({title, slug, state, metaKeyword, metaDescription ,isMenu, sections})
+            const {title, slug, state, metaKeywords, metaDescription ,isMenu, sections} = await PagesAPI.findOne(id);
+            setPage({title, slug, state, metaKeywords, metaDescription ,isMenu, sections})
         } catch (error) {
             console.log(error.response);
         }
@@ -61,6 +67,7 @@ const UserPage = ({match, history}) => {
         setPage({...page, [name]: value})
         console.log(type, name, value);
     }
+
 
     const handleSubmit = async (event) =>{
         event.preventDefault();
@@ -147,16 +154,7 @@ const UserPage = ({match, history}) => {
                                         Mots Clefs
                                     </Form.Label>
                                     <Col sm="4">
-                                        <Form.Control
-                                            name="metaKeyword"
-                                            label="Mots clef"
-                                            placeholder="Mots clef"
-                                            type="text"
-                                            value={page.metaKeyword}
-                                            onChange={handleChange}
-                                            error={errors.definition}
-                                            size="sm"
-                                        />
+
                                     </Col>
                                 </Form.Group>
                             </Col>

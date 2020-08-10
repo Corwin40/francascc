@@ -9,7 +9,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faUserTimes } from '@fortawesome/free-solid-svg-icons';
 import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
-import {Button, Modal} from "react-bootstrap";
+import {Button, Form, Modal} from "react-bootstrap";
 import SectionsAPI from "../../../services/webapp/SectionsAPI";
 import Checkbox from "../../../components/forms/Checkbox";
 
@@ -60,23 +60,25 @@ const ListUser = () => {
         setShowDelete(true);
     }
 
-    const [checkboxes, setCheckboxes] = useState([]);
-    const handleCheckbox = ({currentTarget}) => {
-        const {type, name} = currentTarget;
-        const value = type === 'checkbox' ? currentTarget.checked : currentTarget.value;
-        setCheckboxes({...checkboxes, [name]: value})
-        console.log(type, name, value);
-    }
-
     return (
-
         <>
             <table className="table table-sm table-hover">
                 <tbody>
                 {sections.map(section => (                                                    // La fonction map = for de symfony, key = Sur quelle clé le map doit il opérer.
                     <tr key={section.id}>
-                        <td><input name={section.id} type="checkbox" className="" id="customCheck1" onChange={handleCheckbox} checked={checked}/></td>
+                        <td>
+                            {section.id}
+                        </td>
                         <td>{section.name}</td>
+                        <td>
+                            <Link
+                                className="btn btn-sm btn-primary mr-1"
+                                to={"/section/" + section.id}><FontAwesomeIcon icon={faEdit} />
+                            </Link>
+                            <Button variant="danger" onClick={() => handleDeleteShow(section)} size="sm">
+                                <FontAwesomeIcon icon={faUserTimes} />
+                            </Button>
+                        </td>
                     </tr>
                 ))}
                 </tbody>

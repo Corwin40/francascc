@@ -3,8 +3,11 @@
 namespace App\Entity\Webapp;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Entity\Admin\College;
 use App\Entity\Admin\User;
 use App\Repository\Webapp\ArticlesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -69,6 +72,21 @@ class Articles
      * @Groups({"articles_read"})
      */
     private $updateAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Category::class, mappedBy="articles")
+     */
+    private $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=College::class, inversedBy="articles")
+     */
+    private $college;
+
+    public function __construct()
+    {
+        $this->category = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -150,6 +168,49 @@ class Articles
     public function setUpdateAt(): self
     {
         $this->updateAt = new \DateTime();
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategory(): Collection
+    {
+        return $this->category;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->category->contains($category)) {
+            $this->category[] = $category;
+            $category->setArticles($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->category->contains($category)) {
+            $this->category->removeElement($category);
+            // set the owning side to null (unless already changed)
+            if ($category->getArticles() === $this) {
+                $category->setArticles(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCollege(): ?College
+    {
+        return $this->college;
+    }
+
+    public function setCollege(?College $college): self
+    {
+        $this->college = $college;
 
         return $this;
     }

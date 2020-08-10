@@ -28,7 +28,7 @@ const AsideRightEspColl = () => {
             </Card>
             <Card className="op_espcoll_card">
                 <ListGroup variant="flush">
-                    <ListGroup.Item>nouvel article</ListGroup.Item>
+                    <ListGroup.Item><Link to="/articles/new">nouvel article</Link></ListGroup.Item>
                     <ListGroup.Item>Message(s)</ListGroup.Item>
                 </ListGroup>
             </Card>

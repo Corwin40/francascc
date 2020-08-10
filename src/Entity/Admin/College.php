@@ -3,6 +3,7 @@
 namespace App\Entity\Admin;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Entity\Webapp\Articles;
 use App\Repository\Admin\CollegeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -120,9 +121,15 @@ class College
      */
     private $updateAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Articles::class, mappedBy="college")
+     */
+    private $articles;
+
     public function __construct()
     {
         $this->user = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -320,6 +327,37 @@ class College
     public function setUpdateAt(): self
     {
         $this->updateAt = new \DateTime();
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Articles[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Articles $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setCollege($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Articles $article): self
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+            // set the owning side to null (unless already changed)
+            if ($article->getCollege() === $this) {
+                $article->setCollege(null);
+            }
+        }
 
         return $this;
     }

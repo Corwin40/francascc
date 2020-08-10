@@ -5,6 +5,8 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Table from "react-bootstrap/Table";
 
 const HomePage = (props) => {
+
+
     return(
         <>
             <Card className="op_espcoll_card">
@@ -18,7 +20,8 @@ const HomePage = (props) => {
                     <tr>
                         <th>#</th>
                         <th>Titre</th>
-                        <th>Last Name</th>
+                        <th>catégorie</th>
+                        <th>author</th>
                         <th></th>
                     </tr>
                     </thead>
