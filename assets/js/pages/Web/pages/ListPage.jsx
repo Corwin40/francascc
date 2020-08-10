@@ -89,9 +89,8 @@ const ListPage = () => {
         <>
             <div className="row">
                 <div className="col-12">
-                    <div className="alert alert-dismissible alert-light d-flex justify-content-between align-items-center mb-3">
-                        <h1>Page du site : <small>Listing</small></h1>
-                    </div>
+                   <h3>Gestion des Pages : <small>liste des pages</small></h3>
+                    <hr/>
                 </div>
                 <div className="col-2">
                     <div className="form-group">

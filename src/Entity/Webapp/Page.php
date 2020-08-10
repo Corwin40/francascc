@@ -114,8 +114,8 @@ class Page
     private $updateAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Section::class, mappedBy="page")
-     *
+     * @ORM\OneToMany(targetEntity=Section::class, mappedBy="page", cascade={"remove"})
+     * @ORM\JoinColumn(onDelete="CASCADE")
      * @Groups({"pages_read"})
      */
     private $sections;
