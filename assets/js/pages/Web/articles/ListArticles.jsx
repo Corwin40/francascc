@@ -92,9 +92,8 @@ const ListArticles = () => {
         <>
             <div className="row">
                 <div className="col-12">
-                    <div className="alert alert-dismissible alert-light d-flex justify-content-between align-items-center mb-3">
-                        <h1>CONTENU : <small>Liste des articles</small></h1>
-                    </div>
+                    <h3>Gestion des articles</h3>
+                    <hr/>
                 </div>
                 <div className="col-2">
                     <div className="form-group">

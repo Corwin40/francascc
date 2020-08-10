@@ -93,9 +93,6 @@ const EditArticles = ({match, history}) => {
                     <hr/>
                 </div>
             </div>
-            <div className="d-flex justify-content-between align-items-content mb-3">
-
-            </div>
 
             <form onSubmit={handleSubmit}>
                 <Field

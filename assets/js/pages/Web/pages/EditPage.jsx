@@ -30,7 +30,7 @@ const UserPage = ({match, history}) => {
         title:'',
         slug:'',
         state:'',
-        metaKeywords:'',
+        metaKeywords:{},
         metaDescription:'' ,
         isMenu:false
     });
@@ -39,7 +39,7 @@ const UserPage = ({match, history}) => {
         title:'',
         slug:'',
         state:'',
-        metaKeyword:'',
+        metaKeyword:{},
         metaDescription:'' ,
         isMenu:''
     });

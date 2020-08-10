@@ -8,12 +8,8 @@ import PagesAPI from "../../../services/webapp/PagesAPI";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlusCircle, faMinusCircle} from "@fortawesome/free-solid-svg-icons";
 // import bootstrap react
-import Card from "react-bootstrap/Card";
-import Checkbox from "../../../components/forms/Checkbox";
 import Button from "react-bootstrap/Button";
-import Table from "react-bootstrap/Table";
 import ListSections from "../sections/ListSections";
-import AddSections from "../sections/AddSections";
 import {Form, Modal} from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -37,7 +33,7 @@ const UserPage = ({match, history}) => {
         title:'',
         slug:'',
         state:'',
-        metaKeyword:'',
+        metaKeyword: {},
         metaDescription:'' ,
         isMenu:false,
         sections:'',
@@ -82,7 +78,7 @@ const UserPage = ({match, history}) => {
         fetchPage(id);
     }, [id]);
 
-    const handleChange = ({currentTarget}) => {
+    const handleChangePage = ({currentTarget}) => {
         const {type, name} = currentTarget;
         const value = type === 'checkbox' ? currentTarget.checked : currentTarget.value;
         setPage({...page, [name]: value})
@@ -101,7 +97,6 @@ const UserPage = ({match, history}) => {
             setErrors({});
             setShowAddSection(false);
             toast.info("La nouvelle section a été enregistrée.")
-
         } catch ({response}) {
             const {violations} = response.data;
             if(violations){
@@ -144,7 +139,7 @@ const UserPage = ({match, history}) => {
                         </Button>
                         <Button variant="outline-primary" size="sm" ><FontAwesomeIcon icon={faMinusCircle}/> Sections</Button>
                     </div>
-                    <ListSections/>
+                    <ListSections page={page}/>
                 </div>
             </div>
 
@@ -195,7 +190,6 @@ const UserPage = ({match, history}) => {
                         </Button>
                     </Modal.Footer>
                 </Form>
-
             </Modal>
 
         </>
