@@ -75,13 +75,24 @@ class Articles
 
     /**
      * @ORM\OneToMany(targetEntity=Category::class, mappedBy="articles")
+     *
+     * @Groups({"articles_read"})
      */
     private $category;
 
     /**
      * @ORM\ManyToOne(targetEntity=College::class, inversedBy="articles")
+     *
+     * @Groups({"articles_read"})
      */
     private $college;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Groups({"articles_read"})
+     */
+    private $urlImage;
 
     public function __construct()
     {
@@ -211,6 +222,18 @@ class Articles
     public function setCollege(?College $college): self
     {
         $this->college = $college;
+
+        return $this;
+    }
+
+    public function getUrlImage(): ?string
+    {
+        return $this->urlImage;
+    }
+
+    public function setUrlImage(?string $urlImage): self
+    {
+        $this->urlImage = $urlImage;
 
         return $this;
     }

@@ -15,6 +15,7 @@ import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
 const EditArticles = ({match, history}) => {
 
     let date = new Date();
+
     const formatDate = (str) => moment(str).format('DD/MM/YYYY');
 
     // permet de vérifier route Ajout ou edition
@@ -24,20 +25,21 @@ const EditArticles = ({match, history}) => {
         title:"",
         slug:"",
         content:"",
-
+        urlImage:"",
     });
 
     const [errors, setErrors] = useState({
         title:"",
         slug:"",
         content:"",
+        urlImage:""
     });
 
     // Récupère les données correspondant à l'id transmise pour une modification
     const fetchArticle = async id =>{
         try{
-            const {title, slug, content} = await ArticlesAPI.findOne(id);
-            setArticle({title, slug, content,})
+            const {title, slug, content, urlImage} = await ArticlesAPI.findOne(id);
+            setArticle({title, slug, content, urlImage})
         } catch (error) {
             console.log(error.response);
         }
@@ -87,14 +89,14 @@ const EditArticles = ({match, history}) => {
         <>
             <div className="row">
                 <div className="col-12">
-                    <div className="alert alert-dismissible alert-light d-flex justify-content-between align-items-center mb-3">
-                        <h1>CONTENU : <small>Ajout / Modification </small></h1>
-                    </div>
+                    <h3>Gestion des articles : {!editing && <small>Création d'un article</small> || <small>Modification de l'article : {article.title}</small>}</h3>
+                    <hr/>
                 </div>
             </div>
             <div className="d-flex justify-content-between align-items-content mb-3">
-                {!editing && <h1>Création d'un article</h1> || <h1>Modification de l'article : {article.title}</h1>}
+
             </div>
+
             <form onSubmit={handleSubmit}>
                 <Field
                     name="title"
