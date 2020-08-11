@@ -4,22 +4,14 @@
         <meta charset="UTF-8">
         <title>{% block title %}Op - Accueil{% endblock %}</title>
         {% block stylesheets %}
-            {% if app.request.get('_route') == 'op_admin_dashboard_index' %}
-                {{ encore_entry_link_tags('admin') }}
-            {% elseif app.request.get('_route') == 'op_webapp_log_login' %}
-                {{ encore_entry_link_tags('login') }}
-            {% endif %}
+            {{ encore_entry_link_tags('admin') }}
         {% endblock %}
     </head>
     <body>
         {% block body %}
         {% endblock %}
         {% block javascripts %}
-            {% if app.request.get('_route') == 'op_admin_dashboard_index' %}
             {{ encore_entry_script_tags('admin') }}
-            {% elseif app.request.get('_route') == 'op_webapp_log_login' %}
-            {{ encore_entry_script_tags('login') }}
-            {% endif %}
         {% endblock %}
     </body>
 </html>

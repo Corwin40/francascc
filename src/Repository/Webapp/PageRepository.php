@@ -47,4 +47,15 @@ class PageRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function ListMenu()
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.isMenu = :isMenu')
+            ->setParameter('isMenu', 1)
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

@@ -39,6 +39,14 @@ body {
 .arrowDown{
   transition: 0.5s;
 }
+/*** menu déroulé ***/
+.nav-treeview{
+
+}
+
+.has-treeview{
+
+}
 
 /*** Zone Logo ***/
 
@@ -103,6 +111,7 @@ body {
   position: fixed; /* Stay in place */
   left: $aside-width;
   width: calc(100% - #{$aside-width});
+  height: 100%;
 }
 
 .main-large {
@@ -111,8 +120,33 @@ body {
   position: fixed; /* Stay in place */
   left: $aside-large;
   width: calc(100% - #{$aside-large});
+  height: 100%;
 }
 
+/********
+* REGLES PAGES View
+********/
+
+.op_toolbar_view{
+  margin: 0.3rem 0;
+}
+.op_toolbar_view > .btn {
+  margin-right: 0.3rem;
+}
+
+/********
+* REGLES PAGES Update
+********/
+
+#op_zone_update{
+  background-color: #f1f1f1;
+  padding: 1rem;
+}
+
+
+.form-group {
+  margin-bottom: 0.3rem;
+}
 
 .btn-xs, .btn-group-xs > .btn {
   padding: 0.15rem 0.4rem;

@@ -6,7 +6,7 @@ import Field from "../../components/forms/Fields";
 const LoginPage = ({ history }) => {
 
     // Gestion de l'authentification par les contexts de Réact
-    const { setIsAuthenticated} = useContext(AuthContext);
+    const {isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
 
     // State pour l'alimentation du mot de passe
     const [credentials, setCredentials] = useState({

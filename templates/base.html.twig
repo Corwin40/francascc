@@ -9,54 +9,42 @@
     </head>
     <body>
         {% block banner %}
+        <div id="banniere" class="container-fluid">
+
+        </div>
         {% endblock %}
         {% block header %}
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">NavbarAdmin</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarColor03">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
-                        </li>
-                    </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                </div>
-            </nav>
+            {{ render(controller('App\\Controller\\Webapp\\PageController::listmenu')) }}
         {% endblock %}
-        <div class="container-fluid">
-            {% block body %}
+        <main>
+        {% block body %}
+        {% endblock %}
+        </main>
 
-                <div class="jumbotron">
-                    <h1 class="display-3">Hello, world!</h1>
-                    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                    <hr class="my-4">
-                    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-                    <p class="lead">
-                        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-                    </p>
-                </div>
-
-            {% endblock %}
-        </div>
 
 
         {% block footer %}
+        <div class="container-fluid" id="op_footer">
+            <div class="row" id="op_footer1">
+                <div class="col-3"></div>
+                <div class="col-3"></div>
+                <div class="col-3"></div>
+                <div class="col-3">
+                    <h6>FRANCAS DES LANDES</h6>
+                    <p>3, Allées de la solidarité<br/>
+                    40000 MONT DE MARSAN</p>
+                    <p>Tel : 05 58 46 33 54</p>
+                </div>
+            </div>
+            <div class="row" id="op_footer2">
+                <div class="col-6">
+                    <p>&copy; Collégiens-Citoyens 2020 - Site réalisé par <a href="https://www.openpixl.fr">OpenPixl</a></p>
+                </div>
+                <div class="col-6">
+                    <p class="float-right"><a href="">Mentions légales</a> | <a href="">contacts</a> | <a href="{{ path('op_webapp_app_espcoll') }}">Espace collèges</a></p>
+                </div>
+            </div>
+        </div>
         {% endblock %}
 
         {% block javascripts %}

@@ -1,5 +1,7 @@
-@import "~bootswatch/dist/flatly/variables";
+@import "~bootswatch/dist/yeti/variables";
 @import "~bootstrap/scss/bootstrap";
-@import "~bootswatch/dist/flatly/bootswatch";
-
+@import "~bootswatch/dist/yeti/bootswatch";
+// Import du style personnel
 @import "./app/custom";
+// Style d'adaptation pour bootstrap
+@import "admin/bootstrap";
