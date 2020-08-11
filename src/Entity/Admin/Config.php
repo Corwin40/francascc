@@ -5,9 +5,14 @@ namespace App\Entity\Admin;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\Admin\ConfigRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={
+        "groups"={"configs_read"}
+ *     }
+ * )
  * @ORM\Entity(repositoryClass=ConfigRepository::class)
  */
 class Config
@@ -16,21 +21,29 @@ class Config
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @Groups({"configs_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Groups({"configs_read"})
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
+     *
+     * @Groups({"configs_read"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="boolean")
+     *
+     * @Groups({"configs_read"})
      */
     private $isOffline;
 

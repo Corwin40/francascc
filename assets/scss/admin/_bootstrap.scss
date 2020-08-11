@@ -1,3 +1,7 @@
+.navbar{
+  padding-left: 1rem;
+}
+
 /***
 *   NAVBAR DROPDOWN
  */
@@ -5,4 +9,16 @@
 .btn:focus, .btn.focus {
   outline: 0;
   box-shadow: none;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+hr {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
