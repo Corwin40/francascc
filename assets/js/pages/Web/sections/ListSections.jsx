@@ -2,23 +2,28 @@ import React, { useEffect, useState } from 'react';
 import {Link} from "react-router-dom";
 // Tools
 import moment from "moment";
-import Pagination from "../../../components/tools/Pagination";
-import UsersAPI from "../../../services/admin/UsersAPI";
 // Styles
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEdit, faMinusCircle} from '@fortawesome/free-solid-svg-icons';
-import { faUserTimes } from '@fortawesome/free-solid-svg-icons';
-import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
-import {Button, Form, Modal} from "react-bootstrap";
+import {faEdit, faUserTimes ,faPlusCircle,faMinusCircle} from '@fortawesome/free-solid-svg-icons';
+import {Button, Form, Modal, Row} from "react-bootstrap";
 import SectionsAPI from "../../../services/webapp/SectionsAPI";
-import Checkbox from "../../../components/forms/Checkbox";
+import PagesAPI from "../../../services/webapp/PagesAPI";
+import {toast} from "react-toastify";
 
-const ListUser = (page) => {
+const ListUser = (id) => {
 
     const formatDate = (str) => moment(str).format('DD/MM/YYYY');
 
     // Déclaration des constantes React
     const [sections, setSections] = useState([]);
+    const [addSection, setAddSections] = useState({
+        name : 'nouvelle section',
+        page : '/api/pages/' + id.id
+    })
+    const [errors, setErrors] = useState({
+        name : '',
+        page : ''
+    })
     const [parentPage, setParentPage] = useState([])
     const [loading, setLoading] =useState(true);
     const [showDelete, setShowDelete] = useState(false);
@@ -58,19 +63,53 @@ const ListUser = (page) => {
     // Modal de suppression - fermeture
     const handleDeleteClose = () => setShowDelete(false);
 
-    // CODE POUR LE MODAL D'AJOUT D'UNE SECTION
+    // CODE POUR L'AJOUT D'UNE SECTION
+    const handleSubmitAddSection = async (event) => {
+        event.preventDefault();
+        const response = await SectionsAPI.newOne(addSection);
+        toast.info("La nouvelle page a été enregistrée.")
+        const newData = await SectionsAPI.findAll();
+        setSections(newData);
+    }
 
     return (
         <>
+
+            <div className="op_toolbar_view">
+                <Form onSubmit={handleSubmitAddSection}>
+                    <Button type="submit" variant="outline-primary" size="sm"><FontAwesomeIcon icon={faPlusCircle}/> Sections</Button>
+                </Form>
+
+            </div>
             <table className="table table-sm table-hover">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Nom de la section</th>
+                    <th>Nom de la class</th>
+                    <th></th>
+                </tr>
+                </thead>
                 <tbody>
                 {sections.map(section => (                                                    // La fonction map = for de symfony, key = Sur quelle clé le map doit il opérer.
                     <tr key={section.id}>
+                        <td>{section.id}</td>
                         <td>
-                            {section.id}
+                            <Form.Control
+                                size="sm"
+                                value={section.name}
+                            />
                         </td>
-                        <td>{section.name}</td>
                         <td>
+                            <Form.Control
+                                size="sm"
+                                value={section.className}
+                            />
+                        </td>
+                        <td>
+                            <Button variant="info" onClick={() => handleDeleteShow(section)} size="sm">
+                                <FontAwesomeIcon icon={faEdit} />
+                            </Button>
                             <Button variant="danger" onClick={() => handleDeleteShow(section)} size="sm">
                                 <FontAwesomeIcon icon={faUserTimes} />
                             </Button>

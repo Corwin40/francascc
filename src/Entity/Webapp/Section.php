@@ -58,7 +58,8 @@ class Section
     /**
      * @ORM\Column(type="datetime", nullable=true)
      *
- * @Groups({"sections_read"})     */
+     * @Groups({"sections_read"})
+     */
     private $updateAt;
 
     public function getId(): ?int
@@ -100,6 +101,11 @@ class Section
         $this->className = $className;
 
         return $this;
+    }
+
+    public function getCreateAt(): ?\DateTimeInterface
+    {
+        return $this->createAt;
     }
 
     /**
