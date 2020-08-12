@@ -9,6 +9,7 @@ import {Button, Form, Modal, Row} from "react-bootstrap";
 import SectionsAPI from "../../../services/webapp/SectionsAPI";
 import PagesAPI from "../../../services/webapp/PagesAPI";
 import {toast} from "react-toastify";
+import Col from "react-bootstrap/Col";
 
 const ListUser = (id) => {
 
@@ -55,15 +56,20 @@ const ListUser = (id) => {
             setSections(originalSections);
         }
     };
-    // Modal de suppression - ouverture
+
+
+    // GESTION DE LA MODALE DE SUPPRESSION
+    // Ouverture de la modale
     const handleDeleteShow = (section) => {
         setDeletedSection(section);
         setShowDelete(true);
     }
-    // Modal de suppression - fermeture
+    // Fermeture de la modale
     const handleDeleteClose = () => setShowDelete(false);
 
+
     // CODE POUR L'AJOUT D'UNE SECTION
+    // Bouton de validation pour l'ajout d'une section
     const handleSubmitAddSection = async (event) => {
         event.preventDefault();
         const response = await SectionsAPI.newOne(addSection);
@@ -71,6 +77,37 @@ const ListUser = (id) => {
         const newData = await SectionsAPI.findAll();
         setSections(newData);
     }
+
+
+    // GESTION DE LA MODALE DE MODIFICATION D'UNE SECTION
+    // Elements de base
+    const [showUpdateSection, setShowUpdateSection] = useState(false);
+    const [updateSection, setUpdateSection] = useState({
+        name:'',
+        page:'',
+        className:'',
+    });
+    const [updateSectionErrors, setUpdateSectionErrors] = useState({
+        name:'',
+        page:'',
+        className:'',
+    });
+    // Ouverture de la modale
+    const handleUpdateSectionShow =(section)=>{
+        setShowUpdateSection(true);
+        setUpdateSection(section);
+    }
+    // Fermeture de la modale
+    const handleUpdateSectionClose = () => {
+        setShowUpdateSection(false);
+    }
+    // Mise à jour des champs
+    const handleChangeUpdateSection =({currentTarget})=>{
+        const {type, name} = currentTarget;
+        const value = type === 'checkbox' ? currentTarget.checked : currentTarget.value;
+        setUpdateSection({...updateSection, [name]: value})
+    }
+
 
     return (
         <>
@@ -86,28 +123,22 @@ const ListUser = (id) => {
                 <tr>
                     <th></th>
                     <th>Nom de la section</th>
-                    <th>Nom de la class</th>
+                    <th>Contenu de la section</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 {sections.map(section => (                                                    // La fonction map = for de symfony, key = Sur quelle clé le map doit il opérer.
                     <tr key={section.id}>
-                        <td>{section.id}</td>
-                        <td>
-                            <Form.Control
-                                size="sm"
-                                value={section.name}
-                            />
+                        <td className="align-middle">{section.id}</td>
+                        <td className="align-middle">
+                            {section.name}
+                        </td>
+                        <td className="align-middle">
+                           {section.className}
                         </td>
                         <td>
-                            <Form.Control
-                                size="sm"
-                                value={section.className}
-                            />
-                        </td>
-                        <td>
-                            <Button variant="info" onClick={() => handleDeleteShow(section)} size="sm">
+                            <Button variant="info" onClick={() => handleUpdateSectionShow(section)} size="sm">
                                 <FontAwesomeIcon icon={faEdit} />
                             </Button>
                             <Button variant="danger" onClick={() => handleDeleteShow(section)} size="sm">
@@ -118,7 +149,7 @@ const ListUser = (id) => {
                 ))}
                 </tbody>
             </table>
-            <Modal show={showDelete} onHide={handleDeleteClose}>
+            <Modal id="ModalSectionDelete" show={showDelete} onHide={handleDeleteClose}>
                 <Modal.Body>
                     <h1>Attention</h1>
                     Vous êtes sur le point de supprimer la section : <br/><b></b>{DeletedSection.name}
@@ -133,6 +164,42 @@ const ListUser = (id) => {
                         <FontAwesomeIcon icon={faUserTimes} />
                     </Button>
                 </Modal.Footer>
+            </Modal>
+
+            <Modal id="ModalUpdateSection" show={showUpdateSection} onHide={handleUpdateSectionClose} size="lg" centered>
+                <Form>
+                <Modal.Header>
+                    <h3>Modification de la section</h3>
+                </Modal.Header>
+                <Modal.Body>
+                        <Form.Row>
+                            <Col>
+                                <Form.Group as={Row} controlId="formPlaintextPassword">
+                                    <Form.Label size="sm" column sm="2">
+                                        Titre
+                                    </Form.Label>
+                                    <Col sm="4">
+                                        <Form.Control
+                                            name="name"
+                                            size="sm"
+                                            type="text"
+                                            placeholder="Titre"
+                                            value={updateSection.name}
+                                            onChange={handleChangeUpdateSection}
+                                            error={updateSectionErrors.name}
+                                        />
+                                    </Col>
+                                </Form.Group>
+                            </Col>
+                        </Form.Row>
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleUpdateSectionClose}>
+                        Fermer
+                    </Button>
+                </Modal.Footer>
+                </Form>
             </Modal>
         </>
     );

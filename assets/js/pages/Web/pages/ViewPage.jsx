@@ -68,14 +68,15 @@ const UserPage = ({match, history}) => {
     return (
         <>
             <div className="row">
-                <div className="col-12">
+                <div className="col-10 align-middle">
                     <h3>Pages : <small>{page.title}</small></h3>
-                    <hr/>
+
                 </div>
-                <div className="col-10">
-                    <Link to={"/pages"} className="btn btn-secondary"><FontAwesomeIcon icon={faPlusCircle} /> Retour à la liste des pages</Link>
+                <div className="col-2 align-middle">
+                    <Link to={"/pages"} className="btn btn-secondary float-right"><FontAwesomeIcon icon={faPlusCircle} /> Retour à la liste des pages</Link>
                 </div>
             </div>
+            <hr/>
             <div className="row">
                 <div className="col-sm-12 col-lg-3">
                     <h3>INFORMATIONS</h3>
