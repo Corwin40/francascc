@@ -116,7 +116,6 @@ const ListUser = (id) => {
                 <Form onSubmit={handleSubmitAddSection}>
                     <Button type="submit" variant="outline-primary" size="sm"><FontAwesomeIcon icon={faPlusCircle}/> Sections</Button>
                 </Form>
-
             </div>
             <table className="table table-sm table-hover">
                 <thead>
