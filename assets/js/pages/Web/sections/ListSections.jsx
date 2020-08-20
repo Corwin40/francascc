@@ -108,10 +108,17 @@ const ListUser = (id) => {
         setUpdateSection({...updateSection, [name]: value})
     }
 
+    // Bouton de validation pour l'ajout d'une section
+    const handleSubmitUpdateSection = async (event) => {
+        event.preventDefault();
+        const response = await SectionsAPI.updateOne();
+        toast.info("La nouvelle page a été enregistrée.")
+        const newData = await SectionsAPI.findAll();
+        setSections(newData);
+    }
 
     return (
         <>
-
             <div className="op_toolbar_view">
                 <Form onSubmit={handleSubmitAddSection}>
                     <Button type="submit" variant="outline-primary" size="sm"><FontAwesomeIcon icon={faPlusCircle}/> Sections</Button>
@@ -166,7 +173,7 @@ const ListUser = (id) => {
             </Modal>
 
             <Modal id="ModalUpdateSection" show={showUpdateSection} onHide={handleUpdateSectionClose} size="lg" centered>
-                <Form>
+                <Form onSubmit={handleSubmitUpdateSection()}>
                 <Modal.Header>
                     <h3>Modification de la section</h3>
                 </Modal.Header>
@@ -194,7 +201,8 @@ const ListUser = (id) => {
 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleUpdateSectionClose}>
+                    <Button type="submit" size="sm" variant="outline-warning">Modifier</Button>
+                    <Button variant="outline-danger" size="sm" onClick={handleUpdateSectionClose}>
                         Fermer
                     </Button>
                 </Modal.Footer>

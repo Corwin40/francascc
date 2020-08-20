@@ -110,13 +110,6 @@ class User implements UserInterface
      */
     private $pages;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=College::class, inversedBy="user")
-     *
-     * @Groups({"users_read"})
-     */
-    private $college;
-
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -147,7 +140,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -174,7 +167,7 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return (string)$this->password;
     }
 
     public function setPassword(string $password): self
@@ -331,18 +324,6 @@ class User implements UserInterface
                 $page->setAuthor(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getCollege(): ?College
-    {
-        return $this->college;
-    }
-
-    public function setCollege(?College $college): self
-    {
-        $this->college = $college;
 
         return $this;
     }
