@@ -1,0 +1,396 @@
+/*****
+*   REGLES GENERALES
+*****/
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5f5f5;
+  line-height: 1.5;
+  word-break: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+
+main{
+  height: 100%;
+}
+
+a:visited, a:hover, a:link, a:active {
+  text-decoration: none;
+}
+
+#sp-page-builder .sppb-section-title .sppb-title-heading {
+  margin-top: 20px;
+  font-size: 30px;
+  line-height: 30px;
+  margin-bottom: 15px;
+  border: 0;
+  color: #d84519;
+}
+
+#pattern_1 {
+  height: auto;
+  z-index: 2;
+  top: 0px;
+  left: 0px;
+  opacity: 0.3;
+  position: absolute;
+  background-image: url('./images/pattern.png');
+}
+
+#pattern_2 {
+  z-index: 1;
+  top: 0;
+  left: 0;
+  position: relative;
+}
+
+/*****
+*   REGLES NAVBAR
+*****/
+
+#navbar {
+  background-color: #ffd100;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+#navbar a, #navbar a:visited, {
+  color: #d84519;
+  text-transform: uppercase;
+}
+
+#navbar a:hover {
+  color: #e66943;
+  text-transform: uppercase;
+}
+
+.page-header {
+  margin-bottom: 15px;
+  border-bottom: 4px double #ebebeb;
+}
+
+
+/*****
+*    AFFICHE LA BORDURE POUR LES PAGES EN BLOGS
+*****/
+
+div[itemprop="blogPost"] {
+  border: 4px double #ebebeb;
+  padding: 30px;
+  background-color: #fff;
+  margin-bottom: 1em;
+}
+
+.item-page {
+  border: 4px double #ebebeb;
+  padding: 30px;
+  background-color: #fff;
+  margin-bottom: 1em;
+}
+
+.readmore {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 4px double #ebebeb;
+  clear: both;
+}
+
+.table td, .table th {
+  padding: .75rem;
+  vertical-align: top;
+  border-top: none;
+}
+
+/***
+*  REGLES PAGE COLLEGIENS-CITOYENS
+***/
+
+.entete_colleges > .entete_colleges{
+  border: 4px double #ebebeb;
+  padding: 30px;
+  background-color: #fff;
+  margin-bottom: 1em;
+  height: auto !important;
+}
+
+card_college h4, p {
+  margin-bottom: 0rem;
+}
+
+card_college h4 {
+  font-size: 1.1rem;
+}
+
+card_college p {
+  text-align: right;
+}
+
+/***
+*  REGLES PAGE BUILDER
+***/
+
+.encadre_content {
+  border: 4px double #ebebeb;
+  margin-bottom: 2em !important;
+  padding: 10px;
+  background-color: #fff;
+}
+
+#list_colleges {
+  border: 4px double #ebebeb;
+  padding: 30px;
+  background-color: #fff;
+  margin-bottom: 1em;
+  height: auto !important;
+}
+
+#list_colleges h3 {
+  font-size: 1.5rem;
+}
+
+#list_colleges .sppb-section{
+  height : auto !important;
+}
+
+.list_collège_entete {
+  margin-bottom: 2em;
+}
+
+#college_ligne{
+  margin-bottom: 2em;
+}
+
+/***
+*   colonne sp page-builder
+***/
+
+.sppb-col, .sppb-col-auto, .sppb-col-lg, .sppb-col-lg-1, .sppb-col-lg-10, .sppb-col-lg-11, .sppb-col-lg-12, .sppb-col-lg-2, .sppb-col-lg-3, .sppb-col-lg-4, .sppb-col-lg-5, .sppb-col-lg-6, .sppb-col-lg-7, .sppb-col-lg-8, .sppb-col-lg-9, .sppb-col-lg-auto, .sppb-col-md, .sppb-col-md-1, .sppb-col-md-10, .sppb-col-md-11, .sppb-col-md-12, .sppb-col-md-2, .sppb-col-md-3, .sppb-col-md-4, .sppb-col-md-5, .sppb-col-md-6, .sppb-col-md-7, .sppb-col-md-8, .sppb-col-md-9, .sppb-col-md-auto, .sppb-col-sm, .sppb-col-sm-1, .sppb-col-sm-10, .sppb-col-sm-11, .sppb-col-sm-12, .sppb-col-sm-2, .sppb-col-sm-3, .sppb-col-sm-4, .sppb-col-sm-5, .sppb-col-sm-6, .sppb-col-sm-7, .sppb-col-sm-8, .sppb-col-sm-9, .sppb-col-sm-auto, .sppb-col-xl, .sppb-col-xl-1, .sppb-col-xl-10, .sppb-col-xl-11, .sppb-col-xl-12, .sppb-col-xl-2, .sppb-col-xl-3, .sppb-col-xl-4, .sppb-col-xl-5, .sppb-col-xl-6, .sppb-col-xl-7, .sppb-col-xl-8, .sppb-col-xl-9, .sppb-col-xl-auto, .sppb-col-xs-1, .sppb-col-xs-10, .sppb-col-xs-11, .sppb-col-xs-12, .sppb-col-xs-2, .sppb-col-xs-3, .sppb-col-xs-4, .sppb-col-xs-5, .sppb-col-xs-6, .sppb-col-xs-7, .sppb-col-xs-8, .sppb-col-xs-9 {
+  position: relative;
+  width: auto;
+  min-height: 1px;
+  padding-right: 15px;
+}
+
+/***
+*   MEDIA QUERIES
+***/
+
+@media (max-width: 576px) {
+  h2 {
+    font-size:14px;
+  }
+  p{
+    font-size: 0.7em;
+  }
+  .sppb-row-container{
+    width: 490px;
+  }
+  #content > #sp-page-builder > .page-content > .sppb-section > .sppb-row-container {
+    background-size:100% 100%;
+  }
+  .sp-page-builder .page-content section {
+    padding-top: 3em !important;
+    padding-bottom: 0em !important;
+  }
+  #Header_college img {
+    width: 10em;
+    border: 4px solid white;
+    top: 1.8em;
+    left:20px;
+    position: relative;
+  }
+  #Header_college .nom_college {
+    position: relative;
+    top: 1em;
+  }
+}
+
+
+@media (min-width: 576px) {
+  h2 {
+    font-size:14px;
+  }
+  p{
+    font-size: 0.7em;
+  }
+  .sppb-row-container{
+    width: 540px;
+  }
+  #content > #sp-page-builder > .page-content > .sppb-section > .sppb-row-container {
+    background-size:100% 100%;
+    max-width:540px;
+  }
+  .sp-page-builder .page-content section {
+    padding-top: 3em !important;
+    padding-bottom: 0em !important;
+  }
+  #Header_college img {
+    width: 6em;
+    border: 4px solid white;
+    top: 3em;
+    left: 20px;
+    position: relative;
+  }
+  #Header_college .nom_college {
+    position: relative;
+    top: 0.5em;
+  }
+}
+
+@media (min-width: 768px) {
+  h2 {
+    font-size: 16px;
+  }
+  p{
+    font-size: 0.8em;
+  }
+  .sppb-row-container{
+    width: 690px;
+  }
+  #content > #sp-page-builder > .page-content > .sppb-section > .sppb-row-container {
+    background-size:100% 100%;
+    max-width:720px;
+  }
+  .sp-page-builder .page-content section {
+    padding-top: 3em !important;
+    padding-bottom: 0em !important;
+  }
+  #Header_college img {
+    width: 12em;
+    border: 4px solid white;
+    top: 6em;
+    left:20px;
+    position: relative;
+  }
+  #Header_college .nom_college {
+    position: relative;
+    top: 1em;
+  }
+}
+
+@media (min-width: 992px) {
+  h2 {
+    font-size: 28px;
+  }
+  p{
+    font-size: 0.9em;
+  }
+  .sppb-row-container{
+    width: 960px;
+  }
+  #content > #sp-page-builder > .page-content > .sppb-section > .sppb-row-container {
+    background-size:100% 100%;
+    max-width:930px;
+  }
+  .sp-page-builder .page-content section {
+    padding-top: 3em !important;
+    padding-bottom: 0em !important;
+  }
+  #Header_college img {
+    width: 14em;
+    border: 4px solid white;
+    top: 10em;
+    left:20px;
+    position: relative;
+  }
+  #Header_college .nom_college {
+    position: relative;
+    top: 20em;
+  }
+}
+
+@media (min-width: 1200px) {
+  h2
+  {
+    font-size: 34px;
+  }
+  p{
+    font-size: 1em;
+  }
+  .sppb-row-container{
+    width: 1110px;
+  }
+  #content > #sp-page-builder > .page-content > .sppb-section > .sppb-row-container {
+    background-size:100% 100%;
+    max-width:1140px;
+  }
+  .sp-page-builder .page-content section {
+    padding-top: 3em !important;
+    padding-bottom: 0em !important;
+  }
+  #Header_college img
+  {
+    width: 14em;
+    border: 4px solid white;
+    top: 10em;
+    left:20px;
+    position: relative;
+  }
+  #Header_college .nom_college
+  {
+    position: relative;
+    top: 20em;
+  }
+}
+
+/*****
+*   REGLES FOOTER
+*****/
+#op_footer{
+  box-shadow: 0px 0px 10px 2px rgba(211, 211, 211, 0.75);
+  -moz-box-shadow: 0px 0px 10px 2px rgba(211, 211, 211, 0.75);
+  -webkit-box-shadow: 0px 0px 10px 2px rgba(211, 211, 211, 0.75);}
+
+#op_footer1{
+  padding: 2em 6em;
+  font-size: 14px;
+  background-color: #fdfdfd;
+}
+
+#op_footer2{
+  padding: 2em 6em;
+  background: #666666;
+  font-size: 14px;
+}
+
+#op_footer2 a {
+  color: #ffffff ;
+}
+
+
+/*****
+*
+*   REGLES ESPACE COLLEGES ("op_espcoll")
+*
+*****/
+
+#op_espcoll_row{
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.op_espcoll_card{
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+#op_espcoll_navbar{
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+
+#op_espcoll .alert {
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+
+#op_espcoll .alert-info {
+  color: #0c5460;
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+}
+
+

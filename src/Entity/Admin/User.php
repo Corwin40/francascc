@@ -4,6 +4,7 @@ namespace App\Entity\Admin;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Entity\Webapp\Articles;
+use App\Entity\Webapp\Page;
 use App\Repository\Admin\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -59,7 +60,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Groups({"users_read", "articles_read"})
+     * @Groups({"users_read", "articles_read", "pages_read"})
      * @Assert\NotBlank(message="Ce champs doit contenir un prénom")
      * @Assert\Length(min=3, minMessage="le prénom doit contenir entre 3 et 255 caractères", max=255, maxMessage="le prénom doit contenir entre 3 et 255 caractères")
      */
@@ -68,7 +69,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Groups({"users_read", "articles_read"})
+     * @Groups({"users_read", "articles_read", "pages_read"})
      * @Assert\NotBlank(message="Ce champs doit contenir un nom")
      * @Assert\Length(min=3, minMessage="le nom doit contenir entre 3 et 255 caractères", max=255, maxMessage="le om doit contenir entre 3 et 255 caractères")
      */
@@ -97,12 +98,22 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Articles::class, mappedBy="author")
+     *
+     * @Groups({"users_read"})
      */
     private $articles;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Page::class, mappedBy="author")
+     *
+     * @Groups({"users_read"})
+     */
+    private $pages;
 
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->pages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,7 +140,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -156,7 +167,7 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return (string)$this->password;
     }
 
     public function setPassword(string $password): self
@@ -280,6 +291,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($article->getAuthor() === $this) {
                 $article->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Page[]
+     */
+    public function getPages(): Collection
+    {
+        return $this->pages;
+    }
+
+    public function addPage(Page $page): self
+    {
+        if (!$this->pages->contains($page)) {
+            $this->pages[] = $page;
+            $page->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removePage(Page $page): self
+    {
+        if ($this->pages->contains($page)) {
+            $this->pages->removeElement($page);
+            // set the owning side to null (unless already changed)
+            if ($page->getAuthor() === $this) {
+                $page->setAuthor(null);
             }
         }
 

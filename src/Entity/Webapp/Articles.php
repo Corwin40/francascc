@@ -3,8 +3,11 @@
 namespace App\Entity\Webapp;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Entity\Admin\College;
 use App\Entity\Admin\User;
 use App\Repository\Webapp\ArticlesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -30,7 +33,7 @@ class Articles
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Groups({"articles_read"})
+     * @Groups({"articles_read", "users_read"})
      */
     private $title;
 
@@ -69,6 +72,32 @@ class Articles
      * @Groups({"articles_read"})
      */
     private $updateAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Category::class, mappedBy="articles")
+     *
+     * @Groups({"articles_read"})
+     */
+    private $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=College::class, inversedBy="articles")
+     *
+     * @Groups({"articles_read"})
+     */
+    private $college;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Groups({"articles_read"})
+     */
+    private $urlImage;
+
+    public function __construct()
+    {
+        $this->category = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -150,6 +179,61 @@ class Articles
     public function setUpdateAt(): self
     {
         $this->updateAt = new \DateTime();
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategory(): Collection
+    {
+        return $this->category;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->category->contains($category)) {
+            $this->category[] = $category;
+            $category->setArticles($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->category->contains($category)) {
+            $this->category->removeElement($category);
+            // set the owning side to null (unless already changed)
+            if ($category->getArticles() === $this) {
+                $category->setArticles(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCollege(): ?College
+    {
+        return $this->college;
+    }
+
+    public function setCollege(?College $college): self
+    {
+        $this->college = $college;
+
+        return $this;
+    }
+
+    public function getUrlImage(): ?string
+    {
+        return $this->urlImage;
+    }
+
+    public function setUrlImage(?string $urlImage): self
+    {
+        $this->urlImage = $urlImage;
 
         return $this;
     }

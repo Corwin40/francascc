@@ -1,26 +1,18 @@
 import React from 'react';
+import Form from "react-bootstrap/Form";
 
-const Checkbox = ({name, label, isOn, handleToggle}) => {
+const Checkbox = ({name, label, checked, onChange}) => {
     return (
-        <div className="form-group">
-            <div className="custom-control custom-switch">
-                <input
-                    name={name}
-                    id={name}
-                    type="checkbox"
-                    className="custom-control-input"
-                    id="customSwitch1"
-                    checked={isOn}
-                    onChange={handleToggle}
-                />
-                <label
-                    className="custom-control-label"
-                    htmlFor="customSwitch1"
-                >
-                    {label}
-                </label>
-            </div>
-        </div>
+    <Form>
+        <Form.Check
+            type="switch"
+            id={name}
+            name={name}
+            label={label}
+            checked={checked}
+            onChange={onChange}
+        />
+    </Form>
     )
 }
 
