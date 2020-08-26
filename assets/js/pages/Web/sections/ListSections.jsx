@@ -101,7 +101,7 @@ const ListUser = (id) => {
     const handleUpdateSectionClose = () => {
         setShowUpdateSection(false);
     }
-    // Mise à jour des champs
+    // Mise à jour des champs
     const handleChangeUpdateSection =({currentTarget})=>{
         const {type, name} = currentTarget;
         const value = type === 'checkbox' ? currentTarget.checked : currentTarget.value;
@@ -111,8 +111,10 @@ const ListUser = (id) => {
     // Bouton de validation pour l'ajout d'une section
     const handleSubmitUpdateSection = async (event) => {
         event.preventDefault();
-        const response = await SectionsAPI.updateOne();
-        toast.info("La nouvelle page a été enregistrée.")
+        let id = updateSection.id
+        const response = await SectionsAPI.updateOne(id, updateSection);
+        toast.info("La section a été enregistrée.")
+        setShowUpdateSection(false);
         const newData = await SectionsAPI.findAll();
         setSections(newData);
     }
@@ -173,7 +175,7 @@ const ListUser = (id) => {
             </Modal>
 
             <Modal id="ModalUpdateSection" show={showUpdateSection} onHide={handleUpdateSectionClose} size="lg" centered>
-                <Form onSubmit={handleSubmitUpdateSection()}>
+                <Form onSubmit={handleSubmitUpdateSection}>
                 <Modal.Header>
                     <h3>Modification de la section</h3>
                 </Modal.Header>
