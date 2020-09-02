@@ -110,6 +110,9 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.0.4"
     },
+    "lcobucci/jwt": {
+        "version": "3.3.2"
+    },
     "lexik/jwt-authentication-bundle": {
         "version": "2.5",
         "recipe": {
@@ -124,6 +127,9 @@
     },
     "monolog/monolog": {
         "version": "2.1.0"
+    },
+    "namshi/jose": {
+        "version": "7.2.3"
     },
     "nelmio/cors-bundle": {
         "version": "1.5",

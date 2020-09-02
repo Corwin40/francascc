@@ -160,7 +160,7 @@ const ListUser = (id) => {
             <Modal id="ModalSectionDelete" show={showDelete} onHide={handleDeleteClose}>
                 <Modal.Body>
                     <h1>Attention</h1>
-                    Vous êtes sur le point de supprimer la section : <br/><b></b>{DeletedSection.name}
+                    Vous êtes sur le point de supprimer la section : <br/><b>{DeletedSection.name}</b>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleDeleteClose}>
