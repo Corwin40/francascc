@@ -24,7 +24,7 @@ class AppController extends AbstractController
         {
             return $this->redirectToRoute('op_admin_firstinstall');
         }
-        return $this->render('webapp/app/index.html.twig');
+        return $this->redirectToRoute('op_webapp_app_homepage');
     }
 
     /**
@@ -36,6 +36,28 @@ class AppController extends AbstractController
         $page = $this->getDoctrine()
             ->getRepository(Page::class)
             ->findOneBy(['slug' => $slug]);
+
+        if (!$page) {
+            throw $this->createNotFoundException(
+                "La page n'existe pas" .$slug
+            );
+        }
+
+
+        return $this->render('webapp/app/page.html.twig', [
+            'page' => $page
+        ]);
+    }
+
+    /**
+     * Affiche automaitquement la page d'acceuil
+     * @Route("/home", name="homepage")
+     */
+    public function HomePage($slug)
+    {
+        $page = $this->getDoctrine()
+            ->getRepository(Page::class)
+            ->findOneBy(['id' => 1]);
 
         if (!$page) {
             throw $this->createNotFoundException(
