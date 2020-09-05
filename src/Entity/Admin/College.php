@@ -4,6 +4,7 @@ namespace App\Entity\Admin;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Entity\Webapp\Articles;
+use App\Entity\Webapp\Section;
 use App\Repository\Admin\CollegeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -119,10 +120,16 @@ class College
      */
     private $articles;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Section::class, inversedBy="colleges")
+     */
+    private $section;
+
     public function __construct()
     {
         $this->user = new ArrayCollection();
         $this->articles = new ArrayCollection();
+        $this->section = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -319,6 +326,32 @@ class College
             if ($article->getCollege() === $this) {
                 $article->setCollege(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Section[]
+     */
+    public function getSection(): Collection
+    {
+        return $this->section;
+    }
+
+    public function addSection(Section $section): self
+    {
+        if (!$this->section->contains($section)) {
+            $this->section[] = $section;
+        }
+
+        return $this;
+    }
+
+    public function removeSection(Section $section): self
+    {
+        if ($this->section->contains($section)) {
+            $this->section->removeElement($section);
         }
 
         return $this;

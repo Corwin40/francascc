@@ -94,9 +94,15 @@ class Articles
      */
     private $urlImage;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Section::class, inversedBy="articles")
+     */
+    private $section;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
+        $this->section = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -234,6 +240,32 @@ class Articles
     public function setUrlImage(?string $urlImage): self
     {
         $this->urlImage = $urlImage;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Section[]
+     */
+    public function getSection(): Collection
+    {
+        return $this->section;
+    }
+
+    public function addSection(Section $section): self
+    {
+        if (!$this->section->contains($section)) {
+            $this->section[] = $section;
+        }
+
+        return $this;
+    }
+
+    public function removeSection(Section $section): self
+    {
+        if ($this->section->contains($section)) {
+            $this->section->removeElement($section);
+        }
 
         return $this;
     }

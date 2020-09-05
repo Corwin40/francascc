@@ -3,7 +3,10 @@
 namespace App\Entity\Webapp;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Entity\Admin\College;
 use App\Repository\Webapp\SectionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -61,6 +64,22 @@ class Section
      * @Groups({"sections_read"})
      */
     private $updateAt;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Articles::class, mappedBy="section")
+     */
+    private $articles;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=College::class, mappedBy="section")
+     */
+    private $colleges;
+
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+        $this->colleges = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -130,6 +149,62 @@ class Section
     public function setUpdateAt(): self
     {
         $this->updateAt = new \DateTime();
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Articles[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Articles $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->addSection($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Articles $article): self
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+            $article->removeSection($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|College[]
+     */
+    public function getColleges(): Collection
+    {
+        return $this->colleges;
+    }
+
+    public function addCollege(College $college): self
+    {
+        if (!$this->colleges->contains($college)) {
+            $this->colleges[] = $college;
+            $college->addSection($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCollege(College $college): self
+    {
+        if ($this->colleges->contains($college)) {
+            $this->colleges->removeElement($college);
+            $college->removeSection($this);
+        }
 
         return $this;
     }
