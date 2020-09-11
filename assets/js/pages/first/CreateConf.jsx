@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {HashRouter, Switch, Route, withRouter, Redirect} from "react-router-dom";
 import ConfigAPI from "../../services/admin/ConfigAPI";
 import {Card, Form, Col, Row, Button} from "react-bootstrap";
 
@@ -29,7 +30,7 @@ const CreateConf = () => {
         try {
             const response = await ConfigAPI.newOne(config);
             setConfigErrors({});
-            history.push("/user");
+            return <Redirect to="/user"/>
 
         } catch ({response}) {
             const {violations} = response.data;
