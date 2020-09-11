@@ -29,7 +29,7 @@ class AppController extends AbstractController
 
     /**
      * Affiche la page de menu
-     * @Route("/{slug}", name="page")
+     * @Route("/app/{slug}", name="page")
      */
     public function showPage($slug)
     {
@@ -51,7 +51,7 @@ class AppController extends AbstractController
 
     /**
      * Affiche automaitquement la page d'acceuil
-     * @Route("/home", name="homepage")
+     * @Route("/app/home", name="homepage")
      */
     public function HomePage($slug)
     {

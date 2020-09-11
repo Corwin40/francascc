@@ -11,9 +11,10 @@ import PagesAPI from "../../../services/webapp/PagesAPI";
 import {toast} from "react-toastify";
 import Col from "react-bootstrap/Col";
 
-const ListUser = (id) => {
+const ListSection = (id) => {
 
     const formatDate = (str) => moment(str).format('DD/MM/YYYY');
+    const idpage = id.id;
 
     // Déclaration des constantes React
     const [sections, setSections] = useState([]);
@@ -32,10 +33,11 @@ const ListUser = (id) => {
 
     // CODE POUR LA LISTE DES SECTIONS
     // Capture toutes les entités de la table Section
-    const fetchSections = async () => {
+    const fetchSections = async idpage => {
         try {
-            const data = await SectionsAPI.findAll();
+            const data = await SectionsAPI.findbyPage(idpage);
             setSections(data);
+            console.log(data)
             setLoading(false);
         } catch (error) {
             console.log(error.response)
@@ -43,8 +45,9 @@ const ListUser = (id) => {
     };
     // Charge les données au chargement du composant.
     useEffect(() => {
-        fetchSections();
-    }, []);
+        fetchSections(idpage);
+    }, [idpage]);
+
     // mise en place de la fonction de suppression d'une section
     const handleDelete = async id => {
         const originalSections = [...sections];                        // copie du tableau des sections
@@ -214,4 +217,4 @@ const ListUser = (id) => {
     );
 };
 
-export default ListUser;
+export default ListSection;

@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {HashRouter, Switch, Route, withRouter, Redirect} from "react-router-dom";
 import ConfigAPI from "../../services/admin/ConfigAPI";
 import {Card, Form, Col, Row, Button} from "react-bootstrap";
+import {toast} from "react-toastify";
+import PagesAPI from "../../services/webapp/PagesAPI";
 
 const CreateConf = () => {
 
@@ -18,6 +20,25 @@ const CreateConf = () => {
         description : '',
         isOffline: ''
     })
+
+    // creation de la page d'accueil de l'appli
+    const [page, setPage] = useState({
+        title:'Accueil',
+        slug:'accueil',
+        state:'publiée',
+        metaKeywords:{},
+        metaDescription:'' ,
+        isMenu:true
+    })
+    const [pageErrors, setPageErrors] = useState({
+        title:'',
+        slug:'',
+        state:'',
+        metaKeywords:{},
+        metaDescription:'' ,
+        isMenu:''
+    })
+
     const configHandleChange = ({currentTarget}) => {
         const {type, name} = currentTarget;
         const value = type === 'checkbox' ? currentTarget.checked : currentTarget.value;
@@ -28,9 +49,11 @@ const CreateConf = () => {
     const configHandleSubmit = async (event) =>{
         event.preventDefault();
         try {
-            const response = await ConfigAPI.newOne(config);
+            const responseConf = await ConfigAPI.newOne(config);
+            const responsePage = await PagesAPI.newOne(page);
             setConfigErrors({});
-            return <Redirect to="/user"/>
+            toast.info("Les éléments de compfiguration sont enregistrés.")
+            history.push("/user");
 
         } catch ({response}) {
             const {violations} = response.data;
@@ -107,7 +130,13 @@ const CreateConf = () => {
                                         label="Site hors ligne"
                                     />
                                     <hr/>
-                                    <Button variant="outline-primary" type="submit">
+                                    <p>
+                                        Un utilisateur sera automatiquement crée. ce dernier s'appelle : "Admin" et a pour mot de passe : admin <br/>
+                                        Dès votre première connexion à l'adminstration de l'application : <br/>
+                                        - veuillez vous créez un nouvel utilisateur, <br/>
+                                        - Veuillez vous créez un mot de passe sécurisé contenant au minimum 1 majuscule, 1 minisucule et des chiffres.
+                                    </p>
+                                    <Button variant="outline-primary" type="submit" size="sm">
                                         Valider les informations
                                     </Button>
                                 </Form>

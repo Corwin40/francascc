@@ -3,6 +3,7 @@
 namespace App\Entity\Webapp;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use App\Entity\Admin\User;
 use App\Repository\Webapp\PageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -117,6 +118,7 @@ class Page
      * @ORM\OneToMany(targetEntity=Section::class, mappedBy="page", cascade={"remove"})
      * @ORM\JoinColumn(onDelete="CASCADE")
      * @Groups({"pages_read"})
+     * @ApiSubresource()
      */
     private $sections;
 

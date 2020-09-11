@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *     normalizationContext={
         "groups"={"sections_read"}
- *     }
+ *     },
  * )
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass=SectionRepository::class)

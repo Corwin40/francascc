@@ -21,6 +21,11 @@ function newOne(section) {
         .post("http://localhost:8000/api/sections", section);
 }
 
+function findbyPage(id) {
+    return axios
+        .get("http://localhost:8000/api/pages/" + id +"/sections");
+}
+
 function deletePage(id) {
     axios
         .delete("http://localhost:8000/api/sections/" + id)          // Requete en DELETE
@@ -30,6 +35,7 @@ export default {
     findAll:findAll,
     findOne,
     newOne,
+    findbyPage,
     updateOne,
     delete:deletePage
 };

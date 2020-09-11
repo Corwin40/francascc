@@ -5,11 +5,12 @@ require('bootstrap');
 import React, {useEffect, useState} from "react";
 import ReactDOM from 'react-dom';
 import {HashRouter, Switch, Route, withRouter} from "react-router-dom";
-import {toast, ToastContainer} from "react-toastify";
 import FirstPage from "./pages/first/FirstPage";
 import CreateConf from "./pages/first/CreateConf";
 import CreateUser from "./pages/first/CreateUser";
 import {Navbar} from "react-bootstrap";
+import {toast, ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // imports pages
 
